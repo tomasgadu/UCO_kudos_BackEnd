@@ -9,7 +9,7 @@ Proyecto Integrador Final — Diseño Orientado a Objetos (2026).
 |---|---|
 | Modelo anémico | ✅ |
 | Modelo enriquecido, eventos y políticas | ✅ |
-| Modelo de datos (PostgreSQL) | ⏳ |
+| Modelo de datos (PostgreSQL) | ✅ |
 | Back-End (Spring Boot) | ⏳ |
 | Pruebas y análisis estático | ⏳ |
 | Manual de puesta a punto | ⏳ |
@@ -22,6 +22,7 @@ Toda la documentación está en [`docs/`](docs/):
 - [6. Modelo enriquecido](docs/06_modelo_enriquecido.md) · anexo Excel: [`ModeloDominioEnriquecido_Kudos.xlsx`](docs/anexos/ModeloDominioEnriquecido_Kudos.xlsx)
 - [7. Eventos](docs/07_eventos.md)
 - [8. Políticas](docs/08_politicas.md)
+- [11. Modelo de datos](docs/11_modelo_datos.md) · scripts en [`db/`](db/)
 
 ## Tecnologías previstas
 
