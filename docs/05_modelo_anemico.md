@@ -321,180 +321,20 @@
 
 ## 5.7 Diagrama del modelo anémico
 
-- Diagrama editable: [`diagramas/modelo_anemico.drawio`](diagramas/modelo_anemico.drawio) (imagen: `diagramas/modelo_anemico.png`).
-- El número en círculo es el **nivel de dependencia**: una entidad solo depende de entidades de nivel menor. Sirve como **orden de creación** de tablas y datos de muestreo.
+![Modelo anémico](diagramas/modelo_anemico.png)
 
-| Nivel | Entidades |
+- Diagrama editable: [`diagramas/modelo_anemico.drawio`](diagramas/modelo_anemico.drawio).
+- Muestra entidades, relaciones con verbos, cardinalidades y línea de vida. Los atributos están en la sección 5.4.
+- El **diagrama de clases UML** (con atributos y métodos) se construye desde el modelo enriquecido, en la sección 10.
+- El número en círculo es la **línea de vida**: una entidad solo depende de entidades de número menor. Sirve como **orden de creación** de tablas y datos de muestreo.
+
+| Línea de vida | Entidades |
 |---|---|
 | 1 | Rol, Facultad, Categoria, ParametroSistema |
 | 2 | Usuario, ProgramaAcademico |
 | 3 | SolicitudRegistro, VerificacionContacto, CoordinacionFacultad, CoordinacionPrograma, VinculacionPrograma, Publicacion, Notificacion, RegistroAuditoria |
 | 4 | Kudo, Calificacion, Reporte |
 | 5 | Replica, Veto |
-
-Versión en Mermaid (se ve directamente en GitHub):
-
-```mermaid
-classDiagram
-    direction LR
-
-    class Rol {
-        UUID id
-        CodigoRol codigo
-        String nombre
-        String descripcion
-    }
-    class Usuario {
-        UUID id
-        String nombres
-        String apellidos
-        String correoInstitucional
-        String numeroCelular
-        boolean correoVerificado
-        boolean celularVerificado
-        EstadoCuenta estadoCuenta
-        DateTime fechaRegistro
-    }
-    class SolicitudRegistro {
-        UUID id
-        EstadoSolicitud estado
-        DateTime fechaSolicitud
-        DateTime fechaDecision
-        String observacion
-    }
-    class VerificacionContacto {
-        UUID id
-        TipoVerificacion tipo
-        String valorVerificado
-        String codigo
-        DateTime fechaEnvio
-        DateTime fechaExpiracion
-        DateTime fechaVerificacion
-        EstadoVerificacion estado
-    }
-    class Facultad {
-        UUID id
-        String nombre
-        EstadoRegistro estado
-        DateTime fechaCreacion
-    }
-    class ProgramaAcademico {
-        UUID id
-        String nombre
-        EstadoRegistro estado
-        DateTime fechaCreacion
-    }
-    class VinculacionPrograma {
-        UUID id
-        DateTime fechaInicio
-        DateTime fechaFin
-    }
-    class CoordinacionFacultad {
-        UUID id
-        DateTime fechaInicio
-        DateTime fechaFin
-    }
-    class CoordinacionPrograma {
-        UUID id
-        DateTime fechaInicio
-        DateTime fechaFin
-    }
-    class Categoria {
-        UUID id
-        String nombre
-        String descripcion
-        EstadoRegistro estado
-        DateTime fechaCreacion
-    }
-    class Publicacion {
-        <<abstract>>
-        UUID id
-        String contenido
-        DateTime fechaCreacion
-        EstadoPublicacion estado
-    }
-    class Kudo
-    class Replica
-    class Calificacion {
-        UUID id
-        int estrellas
-        DateTime fechaRegistro
-        DateTime fechaModificacion
-    }
-    class Reporte {
-        UUID id
-        MotivoReporte motivo
-        String descripcion
-        DateTime fechaReporte
-        EstadoReporte estado
-        DateTime fechaDecision
-        String observacionDecision
-    }
-    class Veto {
-        UUID id
-        String justificacion
-        DateTime fechaVeto
-    }
-    class Notificacion {
-        UUID id
-        TipoNotificacion tipo
-        String mensaje
-        DateTime fechaCreacion
-        boolean leida
-    }
-    class RegistroAuditoria {
-        UUID id
-        DateTime fecha
-        String accion
-        String entidadAfectada
-        UUID idEntidadAfectada
-        String valorAnterior
-        String valorNuevo
-    }
-    class ParametroSistema {
-        String clave
-        String valor
-        String descripcion
-    }
-
-    Usuario "0..*" --> "1" Rol : rol
-    Rol "0..*" --> "0..1" Rol : rolAprobador
-
-    SolicitudRegistro "0..*" --> "1" Usuario : solicitante
-    SolicitudRegistro "0..*" --> "0..1" Usuario : aprobador
-    SolicitudRegistro "0..*" --> "1" Rol : rolSolicitado
-    SolicitudRegistro "0..*" --> "0..1" Facultad : ambito
-    SolicitudRegistro "0..*" --> "0..1" ProgramaAcademico : ambito
-    VerificacionContacto "0..*" --> "1" Usuario
-
-    ProgramaAcademico "0..*" --> "1" Facultad
-    VinculacionPrograma "0..*" --> "1" Usuario
-    VinculacionPrograma "0..*" --> "1" ProgramaAcademico
-    CoordinacionFacultad "0..*" --> "1" Usuario : coordinador
-    CoordinacionFacultad "0..*" --> "1" Facultad
-    CoordinacionPrograma "0..*" --> "1" Usuario : coordinador
-    CoordinacionPrograma "0..*" --> "1" ProgramaAcademico
-
-    Publicacion <|-- Kudo
-    Publicacion <|-- Replica
-    Publicacion "0..*" --> "1" Usuario : autor
-    Kudo "0..*" --> "1" Usuario : destinatario
-    Kudo "0..*" --> "1" Categoria
-    Replica "0..*" --> "1" Publicacion : padre
-    Replica "0..*" --> "1" Kudo : kudoRaiz
-
-    Calificacion "0..*" --> "1" Publicacion
-    Calificacion "0..*" --> "1" Usuario : autor
-    Reporte "0..*" --> "1" Publicacion
-    Reporte "0..*" --> "1" Usuario : reportante
-    Reporte "0..*" --> "0..1" Usuario : revisor
-    Veto "0..1" --> "1" Publicacion
-    Veto "0..*" --> "1" Usuario : autoridad
-    Veto "0..1" --> "0..1" Reporte : reporteOrigen
-
-    Notificacion "0..*" --> "1" Usuario : destinatario
-    RegistroAuditoria "0..*" --> "0..1" Usuario : actor
-```
 
 ---
 
@@ -518,8 +358,8 @@ Es la representación del problema en términos de negocio: solo **estructura** 
 **2. ¿Por qué Estudiante, Docente, Rector y Coordinadores no son clases?**
 Porque se modelan como el **rol** del Usuario y no como herencia. RN-001 dice que una persona solo puede tener **un rol activo**, y RN-002 que los roles son **mutuamente excluyentes**. Con un único atributo `rol` es imposible tener dos roles a la vez, y si una persona cambia de cargo solo cambia ese dato. Lo que diferencia a cada rol es **lo que puede hacer** (aprobar, vetar, gestionar), y eso se resuelve en el modelo enriquecido.
 
-**3. ¿Qué significa el número de línea de vida?**
-Indica el **orden en que las entidades pueden existir**: una entidad depende de las de número menor. Es decir, las de número menor son las que permiten la creación de las otras entidades. Ejemplos: Rol (1) → Usuario (2), porque todo usuario necesita un rol; Facultad (1) → Programa Académico (2), porque no hay programa sin facultad; Usuario (2) → Publicación (3) → Kudo (4) → Réplica (5). Este orden se usa luego para crear las tablas e insertar los datos de muestreo.
+**3. ¿Qué significa el número en círculo (línea de vida)?**
+Indica el **orden en que las entidades pueden existir**: una entidad depende de las de número menor. Su número es el mayor de sus dependencias más 1. Ejemplos: Rol (1) → Usuario (2), porque todo usuario necesita un rol; Facultad (1) → Programa Académico (2), porque no hay programa sin facultad; Usuario (2) → Publicación (3) → Kudo (4) → Réplica (5). Este orden se usa luego para crear las tablas e insertar los datos de muestreo.
 
 **4. ¿Por qué Kudo y Réplica heredan de Publicación?**
 Porque **son** publicaciones dentro del sistema, que funciona como un foro donde interactúan los distintos roles. Se aplica la diferencia entre **"es un"** (herencia: un Kudo *es una* publicación) y **"tiene un"** (asociación: un Kudo *tiene una* categoría). Lo que se gana: autor, contenido, fecha y estado se definen una sola vez; Calificación, Reporte y Veto apuntan a una sola entidad; y una Réplica puede responder a un Kudo o a otra Réplica (INV-027). Sin herencia el modelo crecería con relaciones duplicadas (por ejemplo, CalificacionKudo y CalificacionReplica), como pasó en InduMatch con los tipos de cliente.
