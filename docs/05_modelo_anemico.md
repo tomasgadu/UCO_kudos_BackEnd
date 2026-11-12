@@ -321,9 +321,9 @@
 
 ## 5.7 Diagrama del modelo anémico
 
-![Modelo anémico](diagramas/modelo_anemico.png)
+![Modelo anémico](diagramas/modelo_anemico_kudos.png)
 
-- Diagrama editable: [`diagramas/modelo_anemico.drawio`](diagramas/modelo_anemico.drawio).
+- Diagrama editable: [`diagramas/modelo_anemico_kudos.drawio`](diagramas/modelo_anemico_kudos.drawio).
 - Muestra entidades, relaciones con verbos, cardinalidades y línea de vida. Los atributos están en la sección 5.4.
 - El **diagrama de clases UML** (con atributos y métodos) se construye desde el modelo enriquecido, en la sección 10.
 - El número en círculo es la **línea de vida**: una entidad solo depende de entidades de número menor. Sirve como **orden de creación** de tablas y datos de muestreo.
