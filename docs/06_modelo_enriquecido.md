@@ -1095,3 +1095,24 @@ Objeto de dominio que representa la decisión institucional del Rector o del Coo
 | id | publicacion | autoridad | reporteOrigen | justificacion | fechaVeto | Combinación única 1 |
 |---|---|---|---|---|---|---|
 | 1 | Kudo 4 | Carlos Restrepo | Reporte 2 | El contenido incumple la política de respeto institucional. | 2026-11-02 09:00:00 | Kudo 4 |
+
+---
+
+## 6.5 Justificación del autor (retroalimentación)
+
+> Preguntas de autoevaluación planteadas con apoyo de IA a partir del enunciado. Respuestas propias, revisadas y corregidas.
+
+**1. ¿Qué diferencia hay entre el modelo anémico y el enriquecido?**
+El anémico muestra la **estructura** del proyecto (entidades, atributos, relaciones). El enriquecido muestra el **comportamiento** de cada objeto: qué hace (responsabilidades), qué información necesita, con qué objetos colabora, qué reglas protege y qué eventos genera (archivo 01, sección 12).
+
+**2. ¿Cómo funciona la responsabilidad "Publicar un Kudo"?**
+La ejecuta un **usuario autenticado** para reconocer a otra persona. Necesita la lista de **categorías activas** y la lista de **usuarios** para elegir el destinatario. Antes de crear el Kudo valida: que el autor tenga la cuenta activa (PUB-P-0002), que el contenido sea válido y esté sanitizado (PUB-P-0003), que el destinatario exista y esté activo (KUD-P-0001), que autor y destinatario sean distintos (KUD-P-0002) y que la categoría exista **y esté activa** (KUD-P-0003). Luego pasa de CREADO a VISIBLE (PUB-P-0004), notifica al destinatario y queda en auditoría (KUD-P-0004).
+
+**3. ¿En qué se diferencia una política de una regla de negocio?**
+La **regla de negocio** (RN) es lo que la universidad exige, en lenguaje del negocio, y viene del enunciado. La **política** es cómo el diseño garantiza esa regla: qué objeto la valida, qué excepción produce y qué se hace después. Ejemplo: RN-144 ("las categorías desactivadas no se usan para nuevos Kudos") se garantiza con KUD-P-0003 ("Asegurar que la categoría exista y esté activa"). Una regla puede producir varias políticas; por eso cada política indica su **origen**.
+
+**4. ¿Qué es un evento y por qué se nombra en pasado?**
+Un evento es **un hecho que ya ocurrió** en el dominio y que a otros les interesa conocer; por eso se nombra en pasado y no se puede borrar. No es un actor: los actores ejecutan **acciones**, y las acciones producen eventos. Ejemplo: cuando ocurre **"Kudo creado"**, reaccionan la **Notificación** (avisa al destinatario) y el **RegistroAuditoria** (guarda la traza). Se implementa con el patrón **Observer**.
+
+**5. ¿Qué pasa si una autoridad rechaza un reporte?**
+El reporte queda **RECHAZADO** con su observación, y la publicación vuelve a **VISIBLE** siempre que no tenga otros reportes abiertos (RPT-P-0010). Si se acepta, la publicación se **veta** (RPT-P-0009).
