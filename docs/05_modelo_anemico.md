@@ -10,12 +10,12 @@
 | # | Decisión | Por qué |
 |---|----------|---------|
 | D1 | **Estudiante, Docente, Rector y los Coordinadores NO son clases.** Son un **Rol** de `Usuario`. | Un `Usuario` tiene **un solo** `rol` → la exclusividad de roles (RN-001 a RN-038, INV-005, INV-006) se cumple **por estructura**, sin validar 30 combinaciones. Además un objeto no puede "cambiar de clase" si cambia de cargo. |
-| D2 | `Rol` se referencia a sí mismo: **"es aprobado por"**. | La matriz de aprobaciones (anexo 10, §5) queda como **dato**, no como `if`s. Si cambia la cadena, se cambia un registro (Abierto/Cerrado). |
+| D2 | `Rol` se referencia a sí mismo: **"es aprobado por"**. | La matriz de aprobaciones (anexo 10, sección 5) queda como **dato**, no como `if`s. Si cambia la cadena, se cambia un registro (Abierto/Cerrado). |
 | D3 | **`Publicacion` es una clase abstracta** con dos hijas: `Kudo` y `Replica`. | Ambas tienen autor, contenido, fecha y estado, y ambas se califican, reportan y vetan. Así `Calificacion`, `Reporte` y `Veto` apuntan a **una sola** cosa (DRY, polimorfismo útil: ARQ-011). |
 | D4 | El padre de una `Replica` es una `Publicacion` (Kudo **o** Réplica). Además cada réplica guarda su **Kudo raíz**. | Cumple INV-026/027 sin dos columnas "o esta o aquella". El Kudo raíz permite traer **toda la conversación** de una vez (CU-006). |
 | D5 | Las vinculaciones y coordinaciones son **entidades con fechas** (`fechaInicio`, `fechaFin`). | Las reglas piden **historial** (RN-043, RN-051, RN-056, RN-057, RN-064, RN-065). Desvincular = cerrar la fecha, **no borrar**. |
 | D6 | **Aprobación ≠ Activación.** La aprobación vive en `SolicitudRegistro`; la activación en `Usuario.estadoCuenta`. | RN-084: "una cuenta aprobada no implica una cuenta activa". Activa = aprobada + correo verificado + celular verificado (RN-085 a RN-089). |
-| D7 | Celular con indicativo **fijo +57** y sin tipo/número de identificación. | Decisión ya tomada (guía §4). El usuario se identifica por su **correo institucional**. |
+| D7 | Celular con indicativo **fijo +57** y sin tipo/número de identificación. | Decisión del proyecto. El usuario se identifica por su **correo institucional**. |
 
 ---
 
@@ -23,7 +23,7 @@
 
 1. **Una sola universidad.** No se modela la entidad `Universidad` (la plataforma es solo de la UCO). → KISS.
 2. **El Docente lo aprueba el Coordinador de Programa.** La matriz de aprobaciones no lo menciona, pero la de gestión dice que él gestiona docentes.
-3. **Autor ≠ destinatario** en un Kudo ("de una persona **hacia otra**", enunciado §8).
+3. **Autor ≠ destinatario** en un Kudo ("de una persona **hacia otra**", enunciado, sección 8).
 4. **La "revisión" es un estado del `Reporte`** (`EN_REVISION`), no una entidad aparte. → KISS.
 5. **Los indicadores** (promedio de estrellas, totales) **se calculan**, no se guardan.
 6. **Una calificación por usuario y publicación.** Si la cambia, se actualiza la misma; el cambio queda en auditoría.
@@ -284,7 +284,7 @@
 | Relación | Cardinalidad | Regla |
 |---|---|---|
 | Usuario — Rol | N : 1 (cada usuario tiene **1** rol) | RN-001 |
-| Rol — Rol (aprobador) | N : 0..1 | Anexo 10 §5 |
+| Rol — Rol (aprobador) | N : 0..1 | Anexo 10, sección 5 |
 | Usuario — SolicitudRegistro (solicitante) | 1 : 0..N | |
 | Usuario — SolicitudRegistro (aprobador) | 1 : 0..N | RN-090 a RN-095 |
 | Usuario — VerificacionContacto | 1 : 0..N | RN-077 a RN-082 |
