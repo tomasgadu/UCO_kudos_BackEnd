@@ -1,0 +1,25 @@
+# Maven
+target/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración con datos sensibles
+.env
+application-local.properties
+
+# Respaldos de draw.io
+*.drawio.bkp
+*.drawio.dtmp
+
+# Logs
+*.log
