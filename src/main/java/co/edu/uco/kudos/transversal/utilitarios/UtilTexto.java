@@ -47,11 +47,10 @@ public final class UtilTexto {
 	}
 
 	public String aplicarMayusculaInicial(String valor) {
-		var texto = quitarEspacioEnBlanco(valor);
-		if (esVacia(texto)) {
-			return texto;
+		if (UtilObjeto.esNulo(valor) || valor.isBlank()) {
+			return VACIO;
 		}
-		var palabras = texto.toLowerCase().split("\\s+");
+		var palabras = valor.trim().toLowerCase().split("\\s+");
 		var resultado = new StringBuilder();
 		for (var palabra : palabras) {
 			if (!resultado.isEmpty()) {
@@ -60,6 +59,10 @@ public final class UtilTexto {
 			resultado.append(palabra.substring(0, 1).toUpperCase()).append(palabra.substring(1));
 		}
 		return resultado.toString();
+	}
+
+	public String limpiarParaRegistro(String valor) {
+		return obtenerValorDefecto(valor).replaceAll("[\\r\\n]", "_");
 	}
 
 	public int obtenerLongitudCadena(String valor) {

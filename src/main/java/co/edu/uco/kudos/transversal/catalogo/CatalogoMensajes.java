@@ -12,6 +12,7 @@ public final class CatalogoMensajes {
 
 		public static final String USUARIO_ERROR_NO_CONTROLADO = "Se ha presentado un problema inesperado. Por favor intente de nuevo y si el problema persiste contacte al administrador.";
 		public static final String USUARIO_ERROR_SIN_PERMISO = "No tiene permiso para realizar esta acción.";
+		public static final String TECNICO_ERROR_CANTIDAD_DATOS_REGLA = "La regla esperaba al menos {0} datos y recibió {1}.";
 	}
 
 	public static final class UtilSQL {

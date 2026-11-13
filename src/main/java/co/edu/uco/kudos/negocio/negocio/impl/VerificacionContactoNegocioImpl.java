@@ -51,7 +51,8 @@ public final class VerificacionContactoNegocioImpl implements VerificacionContac
 				.fechaExpiracion(ahora.plusMinutes(minutosVigencia())).estado(EstadoVerificacion.PENDIENTE).build();
 		dao.crear(VerificacionContactoEnsambladorEntidad.getInstancia().convertirAEntidad(verificacion));
 
-		LOGGER.info(CatalogoMensajes.Usuario.TECNICO_CODIGO_SIMULADO, tipo, valor, verificacion.getCodigo());
+		LOGGER.info(CatalogoMensajes.Usuario.TECNICO_CODIGO_SIMULADO, tipo, UtilTexto.getUtilTexto().limpiarParaRegistro(valor),
+				verificacion.getCodigo());
 	}
 
 	@Override

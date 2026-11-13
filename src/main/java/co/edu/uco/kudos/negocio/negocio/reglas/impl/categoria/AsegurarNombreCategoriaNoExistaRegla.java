@@ -20,6 +20,7 @@ public final class AsegurarNombreCategoriaNoExistaRegla implements Regla<Object>
 
 	@Override
 	public void ejecutar(Object... datos) {
+		Regla.validarCantidadDatos(datos, 3);
 		var nombre = (String) datos[0];
 		var idExcluido = (UUID) datos[1];
 		var daoFactory = (DAOFactory) datos[2];
