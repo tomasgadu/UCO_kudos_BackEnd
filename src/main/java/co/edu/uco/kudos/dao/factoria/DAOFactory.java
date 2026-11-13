@@ -17,17 +17,15 @@ import co.edu.uco.kudos.dao.datos.entidad.RegistroAuditoriaDAO;
 import co.edu.uco.kudos.dao.datos.entidad.NotificacionDAO;
 import co.edu.uco.kudos.dao.datos.entidad.KudoDAO;
 import co.edu.uco.kudos.dao.datos.entidad.ReplicaDAO;
+import co.edu.uco.kudos.dao.datos.entidad.CalificacionDAO;
+import co.edu.uco.kudos.dao.datos.entidad.ReporteDAO;
+import co.edu.uco.kudos.dao.datos.entidad.VetoDAO;
 import co.edu.uco.kudos.dao.factoria.enums.FactoriaEnum;
 import co.edu.uco.kudos.dao.factoria.impl.PostgreSqlDAOFactory;
 import co.edu.uco.kudos.transversal.catalogo.CatalogoMensajes;
 import co.edu.uco.kudos.transversal.excepciones.KudosDatosExcepcion;
 import co.edu.uco.kudos.transversal.utilitarios.UtilSQL;
 
-/**
- * Abstract Factory: el negocio pide los DAOs sin saber qué motor de base de datos
- * se usa. Cambiar de motor solo requiere otra implementación (Inversión de Dependencias).
- * También maneja la transacción: todos los DAOs comparten la misma conexión.
- */
 public abstract class DAOFactory {
 
 	private Connection conexion;
@@ -101,4 +99,10 @@ public abstract class DAOFactory {
 	public abstract KudoDAO obtenerKudoDAO();
 
 	public abstract ReplicaDAO obtenerReplicaDAO();
+
+	public abstract CalificacionDAO obtenerCalificacionDAO();
+
+	public abstract ReporteDAO obtenerReporteDAO();
+
+	public abstract VetoDAO obtenerVetoDAO();
 }

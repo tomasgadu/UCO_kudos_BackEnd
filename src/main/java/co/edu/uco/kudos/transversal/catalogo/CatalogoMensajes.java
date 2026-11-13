@@ -54,6 +54,10 @@ public final class CatalogoMensajes {
 		public static final String TECNICO_ADVERTENCIA_EXCEPCION_CONTROLADA = "Excepción controlada en la capa {}: {}";
 		public static final String TECNICO_ERROR_PROBLEMA_INESPERADO = "Error inesperado con código de seguimiento {}";
 		public static final String TECNICO_ADVERTENCIA_RECURSO_NO_ENCONTRADO = "Recurso no encontrado {} {} con código de seguimiento {}";
+		public static final String USUARIO_ERROR_FORMATO_INVALIDO = "La información enviada no tiene un formato válido. Revise el cuerpo de la petición.";
+		public static final String USUARIO_ERROR_IDENTIFICADOR_INVALIDO = "El valor '%s' no tiene un formato válido para '%s'.";
+		public static final String USUARIO_ERROR_METODO_NO_PERMITIDO = "La operación %s no está permitida en esta ruta.";
+		public static final String TECNICO_ADVERTENCIA_PETICION_INVALIDA = "Petición inválida: {}";
 	}
 
 	public static final class EstadoControlador {
@@ -210,6 +214,7 @@ public final class CatalogoMensajes {
 		public static final String USUARIO_ERROR_CONTENIDO_OBLIGATORIO = "El contenido de la publicación es obligatorio.";
 		public static final String USUARIO_ERROR_TRANSICION_INVALIDA = "La publicación no puede pasar de %s a %s.";
 		public static final String USUARIO_ERROR_VETADA = "La publicación está vetada y no admite réplicas, calificaciones ni reportes.";
+		public static final String USUARIO_ERROR_NO_EXISTE = "La publicación indicada no existe.";
 	}
 
 	public static final class Kudo {
@@ -232,5 +237,45 @@ public final class CatalogoMensajes {
 		public static final String USUARIO_ERROR_PADRE_NO_EXISTE = "La publicación que intenta responder no existe.";
 		public static final String REPLICA_CREADA = "La réplica se publicó correctamente.";
 		public static final String NOTIFICACION_REPLICA_RECIBIDA = "%s respondió tu publicación.";
+	}
+
+	public static final class Calificacion {
+
+		private Calificacion() {
+		}
+
+		public static final String USUARIO_ERROR_ESTRELLAS = "La calificación debe ser un número entero entre 1 y 5 estrellas.";
+		public static final String CALIFICACION_REGISTRADA = "Su calificación se registró correctamente.";
+	}
+
+	public static final class Reporte {
+
+		private Reporte() {
+		}
+
+		public static final String USUARIO_ERROR_NO_EXISTE = "El reporte indicado no existe.";
+		public static final String USUARIO_ERROR_MOTIVO = "El motivo del reporte no es válido. Use LENGUAJE_OFENSIVO, ACOSO, DISCRIMINACION, SPAM, INFORMACION_FALSA u OTRO.";
+		public static final String USUARIO_ERROR_DESCRIPCION_OTRO = "Si el motivo es OTRO, describa el problema en al menos 10 caracteres.";
+		public static final String USUARIO_ERROR_YA_REPORTADA = "Ya tiene un reporte abierto sobre esta publicación.";
+		public static final String USUARIO_ERROR_NO_PENDIENTE = "Solo se puede iniciar la revisión de un reporte PENDIENTE.";
+		public static final String USUARIO_ERROR_NO_EN_REVISION = "Solo se puede decidir un reporte que esté EN_REVISION.";
+		public static final String USUARIO_ERROR_OBSERVACION = "La decisión necesita una observación de al menos 10 caracteres.";
+		public static final String REPORTE_CREADO = "Su reporte se registró y será revisado.";
+		public static final String REPORTE_EN_REVISION = "El reporte quedó en revisión.";
+		public static final String REPORTE_ACEPTADO = "El reporte se aceptó y la publicación fue vetada.";
+		public static final String REPORTE_RECHAZADO = "El reporte se rechazó.";
+		public static final String OBSERVACION_CIERRE_POR_VETO = "Cerrado automáticamente porque la publicación fue vetada.";
+		public static final String PREFIJO_JUSTIFICACION = "Reporte aceptado: ";
+	}
+
+	public static final class Veto {
+
+		private Veto() {
+		}
+
+		public static final String USUARIO_ERROR_JUSTIFICACION = "La justificación del veto debe tener al menos 20 caracteres.";
+		public static final String USUARIO_ERROR_YA_VETADA = "La publicación ya fue vetada.";
+		public static final String PUBLICACION_VETADA = "La publicación fue vetada.";
+		public static final String NOTIFICACION_CONTENIDO_VETADO = "Una de tus publicaciones fue vetada. Motivo: %s";
 	}
 }

@@ -33,6 +33,12 @@ import co.edu.uco.kudos.dao.datos.entidad.KudoDAO;
 import co.edu.uco.kudos.dao.datos.entidad.postgresql.KudoPostgreSqlDAO;
 import co.edu.uco.kudos.dao.datos.entidad.ReplicaDAO;
 import co.edu.uco.kudos.dao.datos.entidad.postgresql.ReplicaPostgreSqlDAO;
+import co.edu.uco.kudos.dao.datos.entidad.CalificacionDAO;
+import co.edu.uco.kudos.dao.datos.entidad.postgresql.CalificacionPostgreSqlDAO;
+import co.edu.uco.kudos.dao.datos.entidad.ReporteDAO;
+import co.edu.uco.kudos.dao.datos.entidad.postgresql.ReportePostgreSqlDAO;
+import co.edu.uco.kudos.dao.datos.entidad.VetoDAO;
+import co.edu.uco.kudos.dao.datos.entidad.postgresql.VetoPostgreSqlDAO;
 import co.edu.uco.kudos.dao.factoria.DAOFactory;
 import co.edu.uco.kudos.transversal.catalogo.CatalogoMensajes;
 import co.edu.uco.kudos.transversal.excepciones.KudosDatosExcepcion;
@@ -130,5 +136,20 @@ public final class PostgreSqlDAOFactory extends DAOFactory {
 	@Override
 	public ReplicaDAO obtenerReplicaDAO() {
 		return new ReplicaPostgreSqlDAO(getConexion());
+	}
+
+	@Override
+	public CalificacionDAO obtenerCalificacionDAO() {
+		return new CalificacionPostgreSqlDAO(getConexion());
+	}
+
+	@Override
+	public ReporteDAO obtenerReporteDAO() {
+		return new ReportePostgreSqlDAO(getConexion());
+	}
+
+	@Override
+	public VetoDAO obtenerVetoDAO() {
+		return new VetoPostgreSqlDAO(getConexion());
 	}
 }

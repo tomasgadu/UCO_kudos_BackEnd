@@ -49,6 +49,11 @@ public final class KudoDominio extends PublicacionDominio {
 		return copia().estado(EstadoPublicacion.VISIBLE).build();
 	}
 
+	@Override
+	protected KudoDominio conEstado(EstadoPublicacion nuevoEstado) {
+		return copia().estado(nuevoEstado).build();
+	}
+
 	public Builder copia() {
 		return new Builder().id(getId()).autor(getAutor()).contenido(getContenido()).fechaCreacion(getFechaCreacion())
 				.estado(getEstado()).destinatario(destinatario).categoria(categoria);

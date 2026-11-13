@@ -45,6 +45,11 @@ public final class ReplicaDominio extends PublicacionDominio {
 		return copia().estado(EstadoPublicacion.VISIBLE).build();
 	}
 
+	@Override
+	protected ReplicaDominio conEstado(EstadoPublicacion nuevoEstado) {
+		return copia().estado(nuevoEstado).build();
+	}
+
 	public Builder copia() {
 		return new Builder().id(getId()).autor(getAutor()).contenido(getContenido()).fechaCreacion(getFechaCreacion())
 				.estado(getEstado()).idPadre(idPadre).kudoRaiz(kudoRaiz);

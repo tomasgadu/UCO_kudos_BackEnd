@@ -68,6 +68,29 @@ public abstract class PublicacionDominio {
 
 	public abstract PublicacionDominio publicar();
 
+	protected abstract PublicacionDominio conEstado(EstadoPublicacion nuevoEstado);
+
+	public PublicacionDominio marcarReportada() {
+		asegurarNoVetada();
+		return estado == EstadoPublicacion.VISIBLE ? conEstado(EstadoPublicacion.REPORTADO) : this;
+	}
+
+	public PublicacionDominio iniciarRevision() {
+		return estado == EstadoPublicacion.REPORTADO ? conEstado(EstadoPublicacion.EN_REVISION) : this;
+	}
+
+	public PublicacionDominio restaurar() {
+		asegurarTransicion(EstadoPublicacion.EN_REVISION, EstadoPublicacion.VISIBLE);
+		return conEstado(EstadoPublicacion.VISIBLE);
+	}
+
+	public PublicacionDominio vetar() {
+		if (estaVetada()) {
+			throw KudosDominioExcepcion.crear(CatalogoMensajes.Veto.USUARIO_ERROR_YA_VETADA);
+		}
+		return conEstado(EstadoPublicacion.VETADO);
+	}
+
 	protected void asegurarTransicion(EstadoPublicacion origen, EstadoPublicacion destino) {
 		if (estado != origen) {
 			throw KudosDominioExcepcion.crear(
@@ -75,7 +98,7 @@ public abstract class PublicacionDominio {
 		}
 	}
 
-	protected void asegurarNoVetada() {
+	public void asegurarNoVetada() {
 		if (estaVetada()) {
 			throw KudosDominioExcepcion.crear(CatalogoMensajes.Publicacion.USUARIO_ERROR_VETADA);
 		}
