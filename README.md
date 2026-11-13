@@ -19,6 +19,10 @@ Proyecto Integrador Final — Diseño Orientado a Objetos (2026).
 
 Toda la documentación está en [`docs/`](docs/):
 
+- [1. Introducción](docs/01_introduccion.md)
+- [2. Contexto del problema](docs/02_contexto.md)
+- [3. Objetivos](docs/03_objetivos.md)
+- [4. Actores](docs/04_actores.md)
 - [5. Modelo anémico](docs/05_modelo_anemico.md)
 - [6. Modelo enriquecido](docs/06_modelo_enriquecido.md) · anexo Excel: [`ModeloDominioEnriquecido_Kudos.xlsx`](docs/anexos/ModeloDominioEnriquecido_Kudos.xlsx)
 - [7. Eventos](docs/07_eventos.md)
