@@ -10,11 +10,6 @@ import co.edu.uco.kudos.transversal.excepciones.KudosSeguridadExcepcion;
 import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * Sesiones activas en memoria (RNF-001). Al iniciar sesión se entrega un token que el
- * Front-End envía en cada petición con el encabezado "Authorization: Bearer token".
- * Decisión: es lo más simple que cumple autenticación; en producción se usaría JWT.
- */
 public final class GestorSesiones {
 
 	private static final GestorSesiones INSTANCIA = new GestorSesiones();

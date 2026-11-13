@@ -47,10 +47,6 @@ public final class UsuarioNegocioImpl implements UsuarioNegocio {
 		this.eventos = new PublicadorEventos(daoFactory);
 	}
 
-	/**
-	 * RF-001 a RF-005 y RF-012: crea la cuenta REGISTRADA, su solicitud de aprobación y las
-	 * verificaciones de correo y celular (USU-P-0018). La cuenta se activa más adelante.
-	 */
 	@Override
 	public UsuarioDominio registrarUsuario(UsuarioDominio datos, UUID idFacultad, UUID idProgramaAcademico) {
 		ValidarDatosUsuarioRegla.obtenerInstancia().ejecutar(datos, Boolean.TRUE);
@@ -96,10 +92,6 @@ public final class UsuarioNegocioImpl implements UsuarioNegocio {
 		dao.crear(SolicitudRegistroEnsambladorEntidad.getInstancia().convertirAEntidad(solicitud));
 	}
 
-	/**
-	 * USU-P-0011 y USU-P-0012: credenciales correctas y cuenta activa. Si falta algo, se
-	 * le dice al usuario exactamente qué le falta (RN-089).
-	 */
 	@Override
 	public UsuarioDominio iniciarSesion(String correoInstitucional, String clave) {
 		var filtro = new UsuarioEntidad();
@@ -141,10 +133,6 @@ public final class UsuarioNegocioImpl implements UsuarioNegocio {
 		return ObtenerUsuarioActivoRegla.obtenerExistente(id, daoFactory);
 	}
 
-	/**
-	 * RF-009 a RF-011 (RN-102 a RN-111): el usuario actualiza sus datos. Si cambia el correo o
-	 * el celular, debe volver a verificarlo. El rol nunca se cambia aquí (RN-107).
-	 */
 	@Override
 	public UsuarioDominio actualizarMiInformacion(UUID idUsuario, UsuarioDominio datos) {
 		var actual = ObtenerUsuarioActivoRegla.obtenerExistente(idUsuario, daoFactory);
@@ -188,10 +176,6 @@ public final class UsuarioNegocioImpl implements UsuarioNegocio {
 				.convertirADominio(daoFactory.obtenerUsuarioDAO().consultarPorFiltro(filtroEntidad));
 	}
 
-	/**
-	 * Se llama después de verificar un dato o aprobar la solicitud: si ya se cumplen las tres
-	 * condiciones, la cuenta pasa a ACTIVA (RN-085 a RN-088).
-	 */
 	@Override
 	public void evaluarActivacion(UUID idUsuario) {
 		var usuario = ObtenerUsuarioActivoRegla.obtenerExistente(idUsuario, daoFactory);

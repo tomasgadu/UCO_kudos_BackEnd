@@ -26,10 +26,6 @@ import co.edu.uco.kudos.transversal.excepciones.KudosNegocioExcepcion;
 import co.edu.uco.kudos.transversal.utilitarios.UtilFecha;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * Flujo de aprobación por rol (RN-090 a RN-096): cada solicitud la decide el rol aprobador
- * dentro de su ámbito. Al aprobar se asigna la coordinación o la vinculación al programa.
- */
 public final class SolicitudRegistroNegocioImpl implements SolicitudRegistroNegocio {
 
 	private static final String ENTIDAD = "SolicitudRegistro";
@@ -72,7 +68,6 @@ public final class SolicitudRegistroNegocioImpl implements SolicitudRegistroNego
 		return aprobada;
 	}
 
-	/** SOL-P-0008: todo rechazo necesita una observación. */
 	@Override
 	public SolicitudRegistroDominio rechazarSolicitud(UUID idActor, UUID idSolicitud, String observacion) {
 		var actor = ObtenerUsuarioActivoRegla.ejecutar(idActor, daoFactory);
@@ -100,7 +95,6 @@ public final class SolicitudRegistroNegocioImpl implements SolicitudRegistroNego
 		return solicitud;
 	}
 
-	/** SOL-P-0010: al aprobar se crea la coordinación o la vinculación que corresponde al rol. */
 	private void asignarAmbito(SolicitudRegistroDominio solicitud) {
 		var ahora = UtilFecha.obtenerFechaHoraActual();
 		var idUsuario = solicitud.getSolicitante().getId();
@@ -137,7 +131,6 @@ public final class SolicitudRegistroNegocioImpl implements SolicitudRegistroNego
 					solicitud.getProgramaAcademico().getId().toString()));
 		}
 		default -> {
-			// Rector, Coordinador Académico y Administrador no tienen ámbito.
 		}
 		}
 	}

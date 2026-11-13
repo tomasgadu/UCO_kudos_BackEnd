@@ -7,11 +7,6 @@ import co.edu.uco.kudos.transversal.catalogo.CatalogoMensajes;
 import co.edu.uco.kudos.transversal.excepciones.KudosExcepcion;
 import co.edu.uco.kudos.transversal.excepciones.KudosFachadaExcepcion;
 
-/**
- * Template Method: todas las fachadas repiten los mismos pasos (abrir conexión,
- * iniciar transacción, confirmar o cancelar, cerrar). Aquí se escriben una sola vez y
- * cada fachada solo aporta "qué hacer" dentro de la transacción (DRY, SRP).
- */
 public abstract class FachadaBase {
 
 	protected <T> T ejecutarEnTransaccion(String accion, Function<DAOFactory, T> operacion) {

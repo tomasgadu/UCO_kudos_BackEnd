@@ -10,9 +10,6 @@ import co.edu.uco.kudos.controlador.respuesta.RespuestaOk;
 import co.edu.uco.kudos.dao.factoria.DAOFactory;
 import co.edu.uco.kudos.transversal.catalogo.CatalogoMensajes;
 
-/**
- * Permite comprobar que la aplicación y la conexión a la base de datos funcionan.
- */
 @RestController
 @RequestMapping("/api/v1/estado")
 public class EstadoControlador extends AbstractRestController {

@@ -5,9 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * Permite que el Front-End (otro repositorio, otro puerto) consuma la API.
- */
 @Configuration
 public class ConfiguracionCors implements WebMvcConfigurer {
 

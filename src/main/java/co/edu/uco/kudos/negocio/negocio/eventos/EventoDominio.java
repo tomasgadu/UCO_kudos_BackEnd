@@ -5,10 +5,6 @@ import java.util.UUID;
 import co.edu.uco.kudos.dominio.enums.TipoNotificacion;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * Algo que ya ocurrió en el dominio (se nombra en pasado, por ejemplo KUDO_CREADO).
- * Si tiene destinatario, además genera una notificación.
- */
 public record EventoDominio(String nombre, UUID idActor, String entidadAfectada, UUID idEntidadAfectada,
 		String valorAnterior, String valorNuevo, UUID idDestinatario, TipoNotificacion tipoNotificacion,
 		String mensajeNotificacion) {

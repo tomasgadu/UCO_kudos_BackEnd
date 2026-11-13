@@ -24,10 +24,6 @@ import co.edu.uco.kudos.transversal.utilitarios.UtilFecha;
 import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * RN-077 a RN-082: validación de correo y celular con un código temporal.
- * El envío es simulado (H-10): el código se escribe en el log de la aplicación.
- */
 public final class VerificacionContactoNegocioImpl implements VerificacionContactoNegocio {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VerificacionContactoNegocioImpl.class);
@@ -40,7 +36,6 @@ public final class VerificacionContactoNegocioImpl implements VerificacionContac
 		this.daoFactory = daoFactory;
 	}
 
-	/** VER-P-0003: una verificación nueva anula las pendientes anteriores del mismo tipo. */
 	@Override
 	public void generarVerificacion(UsuarioDominio usuario, TipoVerificacion tipo) {
 		var dao = daoFactory.obtenerVerificacionContactoDAO();
@@ -59,7 +54,6 @@ public final class VerificacionContactoNegocioImpl implements VerificacionContac
 		LOGGER.info(CatalogoMensajes.Usuario.TECNICO_CODIGO_SIMULADO, tipo, valor, verificacion.getCodigo());
 	}
 
-	/** VER-P-0001, VER-P-0002, VER-P-0005 y VER-P-0006. */
 	@Override
 	public void verificarCodigo(String correoInstitucional, TipoVerificacion tipo, String codigo) {
 		ValidadorCampos.validarFormato(codigo, "código de verificación", UtilTexto.CODIGO_VERIFICACION);

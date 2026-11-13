@@ -5,9 +5,6 @@ import co.edu.uco.kudos.entidad.NotificacionEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilFecha;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * Genera la notificación del destinatario cuando el evento lo requiere (por ejemplo, Kudo recibido).
- */
 final class NotificacionSuscriptor implements SuscriptorEvento {
 
 	@Override
