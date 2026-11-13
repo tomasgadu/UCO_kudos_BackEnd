@@ -23,7 +23,7 @@ public final class CoordinacionProgramaPostgreSqlDAO extends SqlDAO implements C
 
 	@Override
 	public void crear(CoordinacionProgramaEntidad entidad) {
-		var sql = "INSERT INTO coordinacion_programa (id_coordinacion_programa, id_coordinador, id_programa, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?, ?)";
+		var sql = "INSERT INTO coordinacion_programa (id_coordinacion_programa, id_coordinador, id_programa_academico, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?, ?)";
 		try (var sentencia = getConexion().prepareStatement(sql)) {
 			sentencia.setObject(1, entidad.getId());
 			sentencia.setObject(2, entidad.getCoordinador().getId());
@@ -38,7 +38,7 @@ public final class CoordinacionProgramaPostgreSqlDAO extends SqlDAO implements C
 	}
 	@Override
 	public void actualizar(UUID id, CoordinacionProgramaEntidad entidad) {
-		var sql = "UPDATE coordinacion_programa SET id_coordinador = ?, id_programa = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_coordinacion_programa = ?";
+		var sql = "UPDATE coordinacion_programa SET id_coordinador = ?, id_programa_academico = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_coordinacion_programa = ?";
 		try (var sentencia = getConexion().prepareStatement(sql)) {
 			sentencia.setObject(1, entidad.getCoordinador().getId());
 			sentencia.setObject(2, entidad.getProgramaAcademico().getId());
@@ -71,7 +71,7 @@ public final class CoordinacionProgramaPostgreSqlDAO extends SqlDAO implements C
 	public List<CoordinacionProgramaEntidad> consultarPorFiltro(CoordinacionProgramaEntidad filtro) {
 		var filtroTmp = UtilObjeto.obtenerValorDefectoSiValorOriginalEsNulo(filtro, new CoordinacionProgramaEntidad());
 		var parametros = new ArrayList<Object>();
-		var sql = new StringBuilder("SELECT t.id_coordinacion_programa, t.id_coordinador, t.id_programa, t.fecha_inicio, t.fecha_fin, j1.nombres AS id_coordinador_nombres, j1.apellidos AS id_coordinador_apellidos, j2.nombre AS id_programa_nombre FROM coordinacion_programa t LEFT JOIN usuario j1 ON j1.id_usuario = t.id_coordinador LEFT JOIN programa_academico j2 ON j2.id_programa_academico = t.id_programa ");
+		var sql = new StringBuilder("SELECT t.id_coordinacion_programa, t.id_coordinador, t.id_programa_academico, t.fecha_inicio, t.fecha_fin, j1.nombres AS id_coordinador_nombres, j1.apellidos AS id_coordinador_apellidos, j2.nombre AS id_programa_nombre FROM coordinacion_programa t LEFT JOIN usuario j1 ON j1.id_usuario = t.id_coordinador LEFT JOIN programa_academico j2 ON j2.id_programa_academico = t.id_programa_academico ");
 		if (!UtilUUID.esValorDefecto(filtroTmp.getId())) {
 			agregarCondicion(sql, parametros, "t.id_coordinacion_programa = ?", filtroTmp.getId());
 		}
@@ -79,7 +79,7 @@ public final class CoordinacionProgramaPostgreSqlDAO extends SqlDAO implements C
 			agregarCondicion(sql, parametros, "t.id_coordinador = ?", filtroTmp.getCoordinador().getId());
 		}
 		if (!UtilUUID.esValorDefecto(filtroTmp.getProgramaAcademico().getId())) {
-			agregarCondicion(sql, parametros, "t.id_programa = ?", filtroTmp.getProgramaAcademico().getId());
+			agregarCondicion(sql, parametros, "t.id_programa_academico = ?", filtroTmp.getProgramaAcademico().getId());
 		}
 		sql.append(" ORDER BY t.fecha_inicio DESC");
 		return consultar(sql.toString(), parametros);
@@ -98,7 +98,7 @@ public final class CoordinacionProgramaPostgreSqlDAO extends SqlDAO implements C
 					entidad.getCoordinador().setId(filas.getObject("id_coordinador", UUID.class));
 					entidad.getCoordinador().setNombres(filas.getString("id_coordinador_nombres"));
 					entidad.getCoordinador().setApellidos(filas.getString("id_coordinador_apellidos"));
-					entidad.getProgramaAcademico().setId(filas.getObject("id_programa", UUID.class));
+					entidad.getProgramaAcademico().setId(filas.getObject("id_programa_academico", UUID.class));
 					entidad.getProgramaAcademico().setNombre(filas.getString("id_programa_nombre"));
 					entidad.setFechaInicio(UtilSQL.aFechaHora(filas.getTimestamp("fecha_inicio")));
 					entidad.setFechaFin(UtilSQL.aFechaHora(filas.getTimestamp("fecha_fin")));
