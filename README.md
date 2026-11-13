@@ -29,6 +29,7 @@ Toda la documentación está en [`docs/`](docs/):
 - [8. Políticas](docs/08_politicas.md)
 - [10. Diagramas UML](docs/10_diagramas_uml.md) · fuentes en [`docs/diagramas/`](docs/diagramas/)
 - [11. Modelo de datos](docs/11_modelo_datos.md) · scripts en [`db/`](db/)
+- [15. Análisis estático](docs/15_analisis_estatico.md)
 
 ## Tecnologías
 
