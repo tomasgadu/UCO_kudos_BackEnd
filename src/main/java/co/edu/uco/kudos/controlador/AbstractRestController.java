@@ -6,8 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import co.edu.uco.kudos.controlador.respuesta.RespuestaError;
@@ -41,6 +44,36 @@ public abstract class AbstractRestController {
 				excepcion.getCapa(), excepcion.getMensajeTecnico(), excepcion.getExcepcionRaiz());
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+	}
+
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<RespuestaError<String>> controlarCuerpoInvalido(HttpMessageNotReadableException excepcion) {
+		logger.warn(CatalogoMensajes.AbstractRestController.TECNICO_ADVERTENCIA_PETICION_INVALIDA, excepcion.getMessage());
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(RespuestaError.crear(CatalogoMensajes.AbstractRestController.USUARIO_ERROR_FORMATO_INVALIDO));
+	}
+
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<RespuestaError<String>> controlarParametroInvalido(
+			MethodArgumentTypeMismatchException excepcion) {
+		var mensaje = CatalogoMensajes.AbstractRestController.USUARIO_ERROR_IDENTIFICADOR_INVALIDO
+				.formatted(excepcion.getValue(), excepcion.getName());
+
+		logger.warn(CatalogoMensajes.AbstractRestController.TECNICO_ADVERTENCIA_PETICION_INVALIDA, mensaje);
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RespuestaError.crear(mensaje));
+	}
+
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	public ResponseEntity<RespuestaError<String>> controlarMetodoNoPermitido(
+			HttpRequestMethodNotSupportedException excepcion) {
+		var mensaje = CatalogoMensajes.AbstractRestController.USUARIO_ERROR_METODO_NO_PERMITIDO
+				.formatted(excepcion.getMethod());
+
+		logger.warn(CatalogoMensajes.AbstractRestController.TECNICO_ADVERTENCIA_PETICION_INVALIDA, mensaje);
+
+		return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(RespuestaError.crear(mensaje));
 	}
 
 	@ExceptionHandler(NoResourceFoundException.class)
