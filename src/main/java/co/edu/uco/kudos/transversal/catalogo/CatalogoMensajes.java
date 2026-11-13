@@ -201,4 +201,36 @@ public final class CatalogoMensajes {
 		public static final String SOLICITUD_RECHAZADA = "La solicitud se rechazó correctamente.";
 		public static final String NOTIFICACION_RESUELTA = "Su solicitud de registro como %s fue %s.";
 	}
+
+	public static final class Publicacion {
+
+		private Publicacion() {
+		}
+
+		public static final String USUARIO_ERROR_CONTENIDO_OBLIGATORIO = "El contenido de la publicación es obligatorio.";
+		public static final String USUARIO_ERROR_TRANSICION_INVALIDA = "La publicación no puede pasar de %s a %s.";
+		public static final String USUARIO_ERROR_VETADA = "La publicación está vetada y no admite réplicas, calificaciones ni reportes.";
+	}
+
+	public static final class Kudo {
+
+		private Kudo() {
+		}
+
+		public static final String USUARIO_ERROR_NO_EXISTE = "El Kudo indicado no existe.";
+		public static final String USUARIO_ERROR_MISMO_DESTINATARIO = "No puede darse un Kudo a sí mismo; el reconocimiento es para otra persona.";
+		public static final String USUARIO_ERROR_DESTINATARIO_NO_ACTIVO = "La persona a la que quiere reconocer no tiene la cuenta activa.";
+		public static final String KUDO_CREADO = "El Kudo se publicó correctamente.";
+		public static final String NOTIFICACION_KUDO_RECIBIDO = "%s te dio un Kudo en %s.";
+	}
+
+	public static final class Replica {
+
+		private Replica() {
+		}
+
+		public static final String USUARIO_ERROR_PADRE_NO_EXISTE = "La publicación que intenta responder no existe.";
+		public static final String REPLICA_CREADA = "La réplica se publicó correctamente.";
+		public static final String NOTIFICACION_REPLICA_RECIBIDA = "%s respondió tu publicación.";
+	}
 }

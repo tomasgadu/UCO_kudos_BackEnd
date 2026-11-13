@@ -29,6 +29,10 @@ import co.edu.uco.kudos.dao.datos.entidad.RegistroAuditoriaDAO;
 import co.edu.uco.kudos.dao.datos.entidad.postgresql.RegistroAuditoriaPostgreSqlDAO;
 import co.edu.uco.kudos.dao.datos.entidad.NotificacionDAO;
 import co.edu.uco.kudos.dao.datos.entidad.postgresql.NotificacionPostgreSqlDAO;
+import co.edu.uco.kudos.dao.datos.entidad.KudoDAO;
+import co.edu.uco.kudos.dao.datos.entidad.postgresql.KudoPostgreSqlDAO;
+import co.edu.uco.kudos.dao.datos.entidad.ReplicaDAO;
+import co.edu.uco.kudos.dao.datos.entidad.postgresql.ReplicaPostgreSqlDAO;
 import co.edu.uco.kudos.dao.factoria.DAOFactory;
 import co.edu.uco.kudos.transversal.catalogo.CatalogoMensajes;
 import co.edu.uco.kudos.transversal.excepciones.KudosDatosExcepcion;
@@ -116,5 +120,15 @@ public final class PostgreSqlDAOFactory extends DAOFactory {
 	@Override
 	public NotificacionDAO obtenerNotificacionDAO() {
 		return new NotificacionPostgreSqlDAO(getConexion());
+	}
+
+	@Override
+	public KudoDAO obtenerKudoDAO() {
+		return new KudoPostgreSqlDAO(getConexion());
+	}
+
+	@Override
+	public ReplicaDAO obtenerReplicaDAO() {
+		return new ReplicaPostgreSqlDAO(getConexion());
 	}
 }

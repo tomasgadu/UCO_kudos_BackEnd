@@ -3,7 +3,6 @@ package co.edu.uco.kudos.dto;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
-/** Lo que recibe el Front-End al iniciar sesión: el token y los datos del usuario. */
 public final class SesionDTO {
 
 	private String token;
