@@ -12,33 +12,33 @@ import co.edu.uco.kudos.negocio.negocio.impl.CategoriaNegocioImpl;
 public final class CategoriaFachadaImpl extends FachadaBase implements CategoriaFachada {
 
 	@Override
-	public CategoriaDTO crearCategoria(CategoriaDTO datos) {
+	public CategoriaDTO crearCategoria(UUID idActor, CategoriaDTO datos) {
 		return ejecutarEnTransaccion("crear la categoría", daoFactory -> {
 			var dominio = CategoriaEnsambladorDTO.getInstancia().convertirADominio(datos);
-			var creada = new CategoriaNegocioImpl(daoFactory).crearCategoria(dominio);
+			var creada = new CategoriaNegocioImpl(daoFactory).crearCategoria(idActor, dominio);
 			return CategoriaEnsambladorDTO.getInstancia().convertirADTO(creada);
 		});
 	}
 
 	@Override
-	public CategoriaDTO modificarCategoria(UUID id, CategoriaDTO datos) {
+	public CategoriaDTO modificarCategoria(UUID idActor, UUID id, CategoriaDTO datos) {
 		return ejecutarEnTransaccion("modificar la categoría", daoFactory -> {
 			var dominio = CategoriaEnsambladorDTO.getInstancia().convertirADominio(datos);
-			var modificada = new CategoriaNegocioImpl(daoFactory).modificarCategoria(id, dominio);
+			var modificada = new CategoriaNegocioImpl(daoFactory).modificarCategoria(idActor, id, dominio);
 			return CategoriaEnsambladorDTO.getInstancia().convertirADTO(modificada);
 		});
 	}
 
 	@Override
-	public CategoriaDTO activarCategoria(UUID id) {
+	public CategoriaDTO activarCategoria(UUID idActor, UUID id) {
 		return ejecutarEnTransaccion("activar la categoría", daoFactory -> CategoriaEnsambladorDTO.getInstancia()
-				.convertirADTO(new CategoriaNegocioImpl(daoFactory).activarCategoria(id)));
+				.convertirADTO(new CategoriaNegocioImpl(daoFactory).activarCategoria(idActor, id)));
 	}
 
 	@Override
-	public CategoriaDTO desactivarCategoria(UUID id) {
+	public CategoriaDTO desactivarCategoria(UUID idActor, UUID id) {
 		return ejecutarEnTransaccion("desactivar la categoría", daoFactory -> CategoriaEnsambladorDTO.getInstancia()
-				.convertirADTO(new CategoriaNegocioImpl(daoFactory).desactivarCategoria(id)));
+				.convertirADTO(new CategoriaNegocioImpl(daoFactory).desactivarCategoria(idActor, id)));
 	}
 
 	@Override

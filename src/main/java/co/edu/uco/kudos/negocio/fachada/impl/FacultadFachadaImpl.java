@@ -1,6 +1,7 @@
 package co.edu.uco.kudos.negocio.fachada.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.kudos.dto.FacultadDTO;
 import co.edu.uco.kudos.negocio.fachada.FachadaBase;
@@ -11,10 +12,10 @@ import co.edu.uco.kudos.negocio.negocio.impl.FacultadNegocioImpl;
 public final class FacultadFachadaImpl extends FachadaBase implements FacultadFachada {
 
 	@Override
-	public FacultadDTO registrarFacultad(FacultadDTO datos) {
+	public FacultadDTO registrarFacultad(UUID idActor, FacultadDTO datos) {
 		return ejecutarEnTransaccion("registrar la facultad", daoFactory -> {
 			var dominio = FacultadEnsambladorDTO.getInstancia().convertirADominio(datos);
-			var registrada = new FacultadNegocioImpl(daoFactory).registrarFacultad(dominio);
+			var registrada = new FacultadNegocioImpl(daoFactory).registrarFacultad(idActor, dominio);
 			return FacultadEnsambladorDTO.getInstancia().convertirADTO(registrada);
 		});
 	}

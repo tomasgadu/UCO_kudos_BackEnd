@@ -7,13 +7,13 @@ import co.edu.uco.kudos.dto.CategoriaDTO;
 
 public interface CategoriaFachada {
 
-	CategoriaDTO crearCategoria(CategoriaDTO datos);
+	CategoriaDTO crearCategoria(UUID idActor, CategoriaDTO datos);
 
-	CategoriaDTO modificarCategoria(UUID id, CategoriaDTO datos);
+	CategoriaDTO modificarCategoria(UUID idActor, UUID id, CategoriaDTO datos);
 
-	CategoriaDTO activarCategoria(UUID id);
+	CategoriaDTO activarCategoria(UUID idActor, UUID id);
 
-	CategoriaDTO desactivarCategoria(UUID id);
+	CategoriaDTO desactivarCategoria(UUID idActor, UUID id);
 
 	List<CategoriaDTO> consultarCategorias(CategoriaDTO filtro);
 }

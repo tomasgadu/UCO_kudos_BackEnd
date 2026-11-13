@@ -1,28 +1,40 @@
 package co.edu.uco.kudos.negocio.negocio.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.kudos.dao.factoria.DAOFactory;
 import co.edu.uco.kudos.dominio.ProgramaAcademicoDominio;
+import co.edu.uco.kudos.dominio.UsuarioDominio;
 import co.edu.uco.kudos.dominio.enums.EstadoRegistro;
+import co.edu.uco.kudos.dominio.enums.Permiso;
 import co.edu.uco.kudos.negocio.negocio.ProgramaAcademicoNegocio;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.impl.ProgramaAcademicoEnsambladorEntidad;
+import co.edu.uco.kudos.negocio.negocio.eventos.EventoDominio;
+import co.edu.uco.kudos.negocio.negocio.eventos.PublicadorEventos;
 import co.edu.uco.kudos.negocio.negocio.reglas.impl.facultad.AsegurarFacultadExistaActivaRegla;
 import co.edu.uco.kudos.negocio.negocio.reglas.impl.programa.AsegurarProgramaNoExistaEnFacultadRegla;
 import co.edu.uco.kudos.negocio.negocio.reglas.impl.programa.ValidarDatosProgramaAcademicoRegla;
+import co.edu.uco.kudos.negocio.negocio.reglas.impl.usuario.AsegurarUsuarioTienePermisoRegla;
+import co.edu.uco.kudos.negocio.negocio.reglas.impl.usuario.ObtenerUsuarioActivoRegla;
 import co.edu.uco.kudos.transversal.utilitarios.UtilFecha;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
 public final class ProgramaAcademicoNegocioImpl implements ProgramaAcademicoNegocio {
 
+	private static final String ENTIDAD = "ProgramaAcademico";
+
 	private final DAOFactory daoFactory;
+	private final PublicadorEventos eventos;
 
 	public ProgramaAcademicoNegocioImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
+		this.eventos = new PublicadorEventos(daoFactory);
 	}
 
 	@Override
-	public ProgramaAcademicoDominio registrarProgramaAcademico(ProgramaAcademicoDominio datos) {
+	public ProgramaAcademicoDominio registrarProgramaAcademico(UUID idActor, ProgramaAcademicoDominio datos) {
+		var actor = autorizar(idActor);
 		ValidarDatosProgramaAcademicoRegla.obtenerInstancia().ejecutar(datos);
 		var idFacultad = datos.getFacultad().getId();
 		AsegurarFacultadExistaActivaRegla.obtenerInstancia().ejecutar(idFacultad, daoFactory);
@@ -35,6 +47,7 @@ public final class ProgramaAcademicoNegocioImpl implements ProgramaAcademicoNego
 				.fechaCreacion(UtilFecha.obtenerFechaHoraActual()).build();
 
 		dao.crear(ProgramaAcademicoEnsambladorEntidad.getInstancia().convertirAEntidad(nuevo));
+		eventos.publicar(EventoDominio.de("PROGRAMA_REGISTRADO", actor.getId(), ENTIDAD, nuevo.getId(), null, nuevo.getNombre()));
 		return nuevo;
 	}
 
@@ -43,5 +56,11 @@ public final class ProgramaAcademicoNegocioImpl implements ProgramaAcademicoNego
 		var filtroEntidad = ProgramaAcademicoEnsambladorEntidad.getInstancia().convertirAEntidad(filtro);
 		var programas = daoFactory.obtenerProgramaAcademicoDAO().consultarPorFiltro(filtroEntidad);
 		return ProgramaAcademicoEnsambladorEntidad.getInstancia().convertirADominio(programas);
+	}
+
+	private UsuarioDominio autorizar(UUID idActor) {
+		var actor = ObtenerUsuarioActivoRegla.ejecutar(idActor, daoFactory);
+		AsegurarUsuarioTienePermisoRegla.obtenerInstancia().ejecutar(actor, Permiso.GESTIONAR_ESTRUCTURA);
+		return actor;
 	}
 }

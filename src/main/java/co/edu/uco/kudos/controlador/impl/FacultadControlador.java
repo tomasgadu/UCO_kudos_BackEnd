@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +31,11 @@ public class FacultadControlador extends AbstractRestController {
 	}
 
 	@PostMapping
-	public ResponseEntity<RespuestaOk<FacultadDTO>> registrarFacultad(@RequestBody FacultadDTO datos) {
-		var registrada = fachada.registrarFacultad(datos);
+	public ResponseEntity<RespuestaOk<FacultadDTO>> registrarFacultad(
+			@RequestHeader(name = ENCABEZADO_AUTORIZACION, required = false) String autorizacion,
+			@RequestBody FacultadDTO datos) {
+		var idActor = obtenerIdUsuarioSesion(autorizacion);
+		var registrada = fachada.registrarFacultad(idActor, datos);
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Facultad.FACULTAD_REGISTRADA, registrada));
 	}
 }

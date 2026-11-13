@@ -278,4 +278,13 @@ public final class CatalogoMensajes {
 		public static final String PUBLICACION_VETADA = "La publicación fue vetada.";
 		public static final String NOTIFICACION_CONTENIDO_VETADO = "Una de tus publicaciones fue vetada. Motivo: %s";
 	}
+
+	public static final class Notificacion {
+
+		private Notificacion() {
+		}
+
+		public static final String USUARIO_ERROR_NO_EXISTE = "La notificación indicada no existe.";
+		public static final String NOTIFICACION_LEIDA = "La notificación se marcó como leída.";
+	}
 }

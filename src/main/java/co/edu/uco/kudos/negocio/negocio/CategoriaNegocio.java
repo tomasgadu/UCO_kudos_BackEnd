@@ -7,13 +7,13 @@ import co.edu.uco.kudos.dominio.CategoriaDominio;
 
 public interface CategoriaNegocio {
 
-	CategoriaDominio crearCategoria(CategoriaDominio datos);
+	CategoriaDominio crearCategoria(UUID idActor, CategoriaDominio datos);
 
-	CategoriaDominio modificarCategoria(UUID id, CategoriaDominio datos);
+	CategoriaDominio modificarCategoria(UUID idActor, UUID id, CategoriaDominio datos);
 
-	CategoriaDominio activarCategoria(UUID id);
+	CategoriaDominio activarCategoria(UUID idActor, UUID id);
 
-	CategoriaDominio desactivarCategoria(UUID id);
+	CategoriaDominio desactivarCategoria(UUID idActor, UUID id);
 
 	List<CategoriaDominio> consultarCategorias(CategoriaDominio filtro);
 }

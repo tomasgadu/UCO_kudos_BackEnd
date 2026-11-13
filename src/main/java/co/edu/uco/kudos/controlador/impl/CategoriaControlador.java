@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,27 +36,38 @@ public class CategoriaControlador extends AbstractRestController {
 	}
 
 	@PostMapping
-	public ResponseEntity<RespuestaOk<CategoriaDTO>> crearCategoria(@RequestBody CategoriaDTO datos) {
-		var creada = fachada.crearCategoria(datos);
+	public ResponseEntity<RespuestaOk<CategoriaDTO>> crearCategoria(
+			@RequestHeader(name = ENCABEZADO_AUTORIZACION, required = false) String autorizacion,
+			@RequestBody CategoriaDTO datos) {
+		var idActor = obtenerIdUsuarioSesion(autorizacion);
+		var creada = fachada.crearCategoria(idActor, datos);
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Categoria.CATEGORIA_CREADA, creada));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RespuestaOk<CategoriaDTO>> modificarCategoria(@PathVariable("id") UUID id,
-			@RequestBody CategoriaDTO datos) {
-		var modificada = fachada.modificarCategoria(id, datos);
+	public ResponseEntity<RespuestaOk<CategoriaDTO>> modificarCategoria(
+			@RequestHeader(name = ENCABEZADO_AUTORIZACION, required = false) String autorizacion,
+			@PathVariable("id") UUID id, @RequestBody CategoriaDTO datos) {
+		var idActor = obtenerIdUsuarioSesion(autorizacion);
+		var modificada = fachada.modificarCategoria(idActor, id, datos);
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Categoria.CATEGORIA_MODIFICADA, modificada));
 	}
 
 	@PatchMapping("/{id}/activar")
-	public ResponseEntity<RespuestaOk<CategoriaDTO>> activarCategoria(@PathVariable("id") UUID id) {
-		var activada = fachada.activarCategoria(id);
+	public ResponseEntity<RespuestaOk<CategoriaDTO>> activarCategoria(
+			@RequestHeader(name = ENCABEZADO_AUTORIZACION, required = false) String autorizacion,
+			@PathVariable("id") UUID id) {
+		var idActor = obtenerIdUsuarioSesion(autorizacion);
+		var activada = fachada.activarCategoria(idActor, id);
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Categoria.CATEGORIA_ACTIVADA, activada));
 	}
 
 	@PatchMapping("/{id}/desactivar")
-	public ResponseEntity<RespuestaOk<CategoriaDTO>> desactivarCategoria(@PathVariable("id") UUID id) {
-		var desactivada = fachada.desactivarCategoria(id);
+	public ResponseEntity<RespuestaOk<CategoriaDTO>> desactivarCategoria(
+			@RequestHeader(name = ENCABEZADO_AUTORIZACION, required = false) String autorizacion,
+			@PathVariable("id") UUID id) {
+		var idActor = obtenerIdUsuarioSesion(autorizacion);
+		var desactivada = fachada.desactivarCategoria(idActor, id);
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Categoria.CATEGORIA_DESACTIVADA, desactivada));
 	}
 }
