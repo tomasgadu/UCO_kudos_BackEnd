@@ -1,13 +1,24 @@
 # Maven
 target/
+!.mvn/wrapper/maven-wrapper.jar
 
-# IDEs
-.idea/
-*.iml
-.vscode/
+# IDEs (Eclipse / Spring Tools)
 .settings/
 .project
 .classpath
+.factorypath
+.springBeans
+.sts4-cache/
+.apt_generated/
+bin/
+
+# IDEs (otros)
+.idea/
+*.iml
+.vscode/
+
+# Archivo de ayuda que genera Spring Initializr
+HELP.md
 
 # Sistema operativo
 .DS_Store
