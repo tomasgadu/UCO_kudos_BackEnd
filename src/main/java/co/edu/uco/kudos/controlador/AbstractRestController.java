@@ -17,11 +17,6 @@ import co.edu.uco.kudos.transversal.excepciones.KudosExcepcion;
 import co.edu.uco.kudos.transversal.excepciones.KudosSeguridadExcepcion;
 import co.edu.uco.kudos.transversal.utilitarios.UtilUUID;
 
-/**
- * Manejo centralizado de errores (RNF-006): toda excepción del proyecto se
- * convierte en una respuesta clara para el usuario y queda registrada en el log
- * para el técnico (RNF-013).
- */
 @RestControllerAdvice
 public abstract class AbstractRestController {
 
@@ -29,7 +24,6 @@ public abstract class AbstractRestController {
 
 	public static final String ENCABEZADO_AUTORIZACION = "Authorization";
 
-	/** Obtiene el usuario de la sesión a partir del encabezado Authorization (RNF-001). */
 	protected UUID obtenerIdUsuarioSesion(String encabezadoAutorizacion) {
 		return GestorSesiones.obtenerInstancia().obtenerIdUsuario(encabezadoAutorizacion);
 	}
