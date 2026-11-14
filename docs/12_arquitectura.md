@@ -69,8 +69,8 @@ Cada capa tiene su excepción (`KudosDominioExcepcion`, `KudosNegocioExcepcion`,
 
 | Situación | Código |
 |---|---|
-| Sin sesión, token inválido o sin permiso (`KudosSeguridadExcepcion`) | 401 |
-| Regla de negocio incumplida o dato inválido (`KudosExcepcion`) | 400 |
+| Sin sesión o token inválido (`KudosSeguridadExcepcion`) | 401 |
+| Regla de negocio incumplida, dato inválido o rol sin permiso (`KudosExcepcion`) | 400 |
 | JSON mal formado o UUID inválido | 400 |
 | Método HTTP no permitido | 405 |
 | Ruta inexistente | 404 |

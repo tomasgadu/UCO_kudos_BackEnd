@@ -43,7 +43,7 @@ Cualquier usuario con cuenta activa puede dar Kudos, replicar, calificar y repor
 | Revisar reportes | | ✅ | ✅ | |
 | Vetar contenido | | ✅ | ✅ | |
 
-En el código, estos permisos están en el enum `CodigoRol`. Cada endpoint protegido valida el permiso antes de ejecutar la operación; si falta, responde **401**.
+En el código, estos permisos están en el enum `CodigoRol`. Cada endpoint protegido valida el permiso antes de ejecutar la operación; si falta, responde **400** con el mensaje "Su rol no tiene permiso para realizar esta acción." (el **401** se reserva para cuando no hay sesión o el token no es válido).
 
 ## 4.4 Actores en los casos de uso
 

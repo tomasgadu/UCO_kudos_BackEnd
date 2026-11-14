@@ -81,11 +81,11 @@ Colección organizada por flujo. El token de sesión se guarda en una variable (
 | Réplicas | Responder un Kudo; responder una réplica (mantiene el Kudo raíz); responder lo vetado; ver la conversación | 200 / 400 |
 | Calificaciones | Calificar; cambiar la calificación; estrellas fuera de rango; consultar el resumen | 200 / 400 |
 | Reportes y vetos | Reportar; reporte duplicado; tomar en revisión; aceptar (produce el veto); rechazar (restaura); vetar lo ya vetado | 200 / 400 |
-| Permisos | Estudiante creando una categoría; Administrador vetando | 401 |
+| Permisos | Rol sin permiso consultando reportes, registrando una facultad o vetando; crear categoría sin sesión | 400 / 400 / 400 / 401 |
 | Notificaciones y auditoría | Consultar y marcar como leída; consultar la auditoría con filtros | 200 |
 | Peticiones mal formadas | JSON inválido; UUID inválido; método no permitido; ruta inexistente | 400 / 400 / 405 / 404 |
 
-Las capturas de estas pruebas están en el archivo de evidencias.
+Las capturas de estas pruebas están en [19. Evidencias](19_evidencias.md).
 
 ## 16.5 Cómo ejecutar las pruebas
 
