@@ -9,7 +9,7 @@ Cómo se atiende cada criterio de calidad de la rúbrica (CAL-001 a CAL-007).
 | **CAL-003 Reutilización** | Reglas reutilizables (`Regla<T>`), `FachadaBase`, `UtilTexto`/`UtilUUID`/`UtilFecha`, `ValidadorCampos`; en el Front, `api.js` y `ui.js`. | Secciones 12 y 13 |
 | **CAL-004 Bajo acoplamiento** | El negocio depende de `DAOFactory` y no de PostgreSQL; eventos con Observer; el Front solo conoce la API por `api.js`. | Sección 13.3 (D de SOLID) |
 | **CAL-005 Alta cohesión** | Cada clase agrupa lo de un solo concepto: el ciclo de vida de la publicación vive en `PublicacionDominio`; los permisos en `CodigoRol`. | Sección 9 |
-| **CAL-006 Testabilidad** | Dominio sin dependencias externas, así que se prueba sin base de datos; reglas con instancia única fácil de llamar. | 80 pruebas JUnit, 100 % exitosas (sección 16) |
+| **CAL-006 Testabilidad** | Dominio sin dependencias externas, así que se prueba sin base de datos; reglas con instancia única fácil de llamar. | 85 pruebas JUnit, 100 % exitosas (sección 16) |
 | **CAL-007 Evolución** | Agregar un suscriptor, un rol, un permiso o un motor de base de datos no obliga a reescribir lo existente; la matriz de aprobaciones es un dato. | Sección 13.3 (O de SOLID) |
 
 ## 14.1 Clean Code aplicado

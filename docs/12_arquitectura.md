@@ -84,6 +84,7 @@ El usuario siempre ve un mensaje claro; el detalle técnico queda solo en el log
 |---|---|
 | Contraseñas | Cifradas con **BCrypt** (`UtilClave`); nunca se guardan ni se devuelven en texto plano. |
 | Sesión | Al iniciar sesión se crea un token aleatorio guardado en memoria (`GestorSesiones`), vigente 8 horas. Se envía como `Authorization: Bearer <token>`. |
+| Inicio de sesión con Google | El Front obtiene un token de Google (Google Identity Services) y lo envía a `POST /sesiones/google`. `VerificadorTokenGoogle` lo valida con Google (`tokeninfo`), comprueba que sea para el ID de cliente de la aplicación (`KUDOS_GOOGLE_CLIENT_ID`) y que el correo esté verificado. Después se aplican las mismas validaciones del inicio de sesión normal (usuario registrado y cuenta activa). |
 | Permisos | Cada operación protegida llama a `AsegurarUsuarioTienePermisoRegla` con el permiso que exige. |
 | CORS | Solo se aceptan peticiones del origen del Front (`kudos.cors.origen-permitido`). |
 | Contenido | Se quitan etiquetas HTML (`SanearContenidoPublicacionRegla`) y el Front muestra todo con `textContent` (contra XSS). |

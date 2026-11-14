@@ -28,10 +28,11 @@ Ubicación: `src/test/java/co/edu/uco/kudos/`. `FabricaDominioPrueba` construye 
 | `AsegurarUsuarioTienePermisoReglaTest` | Permisos por rol. | 3 |
 | `SanearContenidoPublicacionReglaTest` | Quita etiquetas HTML y rechaza el contenido vacío. | 5 |
 | `ValidadorCamposTest` | Campos obligatorios, longitud, formato del celular e identificador por defecto. | 5 |
-| `UtilTextoTest` | Mayúscula inicial, nulos sin `NullPointerException`, limpieza para el log (corrección de SonarQube), formatos de correo y clave. | 8 |
+| `UtilTextoTest` | Mayúscula inicial, nulos sin `NullPointerException`, limpieza para el log (corrección de SonarQube), formatos de correo y clave, `textoDeEnum` y correo en varios dominios permitidos. | 10 |
+| `VerificadorTokenGoogleTest` | Inicio de sesión con Google: acepta un token válido de la aplicación; rechaza un token de otra aplicación y un correo sin verificar; lee los campos de la respuesta de Google. | 4 |
 | `UtilClaveTest` | Cifrado BCrypt y código de verificación de 6 dígitos. | 6 |
 | `UcoKudosBackEndApplicationTests` | El contexto de Spring Boot arranca. | 1 |
-| **Total** | | **79** |
+| **Total** | | **85** |
 
 ### Técnicas usadas
 
@@ -45,7 +46,7 @@ Ubicación: `src/test/java/co/edu/uco/kudos/`. `FabricaDominioPrueba` construye 
 
 ### Resultado
 
-**79 de 79 pruebas exitosas, 0 errores y 0 fallas**, en menos de 4 segundos.
+**85 de 85 pruebas exitosas, 0 errores y 0 fallas**, en menos de 4 segundos.
 
 ![Resultado JUnit](evidencias/junit_resultados.png)
 

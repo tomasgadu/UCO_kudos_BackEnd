@@ -117,11 +117,12 @@ La conexión a la base de datos **no** está escrita en el código ni en `applic
 | `KUDOS_DB_URL` | `jdbc:postgresql://localhost:5432/kudos?currentSchema=kudos` | Dirección de la base de datos y esquema |
 | `KUDOS_DB_USUARIO` | `postgres` | Usuario de PostgreSQL |
 | `KUDOS_DB_CLAVE` | *(la clave de tu PostgreSQL)* | Clave de ese usuario |
+| `KUDOS_GOOGLE_CLIENT_ID` | `xxxx.apps.googleusercontent.com` | ID de cliente de Google para iniciar sesión con Google (ver 4.5). Sin ella, el inicio con Google responde un error controlado y el resto funciona igual. |
 
 ### 4.1 En Eclipse
 
 1. *Run → Run Configurations… → Spring Boot App* (o *Java Application*) → `UcoKudosBackEndApplication`.
-2. Pestaña **Environment** → *Add…* y agregar las tres variables.
+2. Pestaña **Environment** → *Add…* y agregar las cuatro variables.
 3. *Apply*.
 
 ### 4.2 En la terminal (para ejecutar con Maven o el `.jar`)
@@ -132,6 +133,7 @@ Windows (PowerShell), válido para esa ventana:
 $env:KUDOS_DB_URL="jdbc:postgresql://localhost:5432/kudos?currentSchema=kudos"
 $env:KUDOS_DB_USUARIO="postgres"
 $env:KUDOS_DB_CLAVE="tu_clave"
+$env:KUDOS_GOOGLE_CLIENT_ID="tu_id_de_cliente.apps.googleusercontent.com"
 ```
 
 Linux / macOS:
@@ -140,6 +142,7 @@ Linux / macOS:
 export KUDOS_DB_URL="jdbc:postgresql://localhost:5432/kudos?currentSchema=kudos"
 export KUDOS_DB_USUARIO="postgres"
 export KUDOS_DB_CLAVE="tu_clave"
+export KUDOS_GOOGLE_CLIENT_ID="tu_id_de_cliente.apps.googleusercontent.com"
 ```
 
 ### 4.3 Otros parámetros (`src/main/resources/application.properties`)
@@ -157,6 +160,24 @@ export KUDOS_DB_CLAVE="tu_clave"
 | `liveServer.settings.host` | `localhost` | Con `127.0.0.1` el navegador lo toma como otro origen y bloquea las peticiones |
 
 La dirección del Back-End está en `js/api.js` (`API_URL = "http://localhost:8080/api/v1"`).
+
+### 4.5 Inicio de sesión con Google
+
+1. Entrar a [Google Cloud Console](https://console.cloud.google.com) y crear un proyecto (por ejemplo, `UCO Kudos`).
+2. *APIs y servicios → Pantalla de consentimiento de OAuth*: tipo **Externo**, nombre de la aplicación y correo de soporte. Agregar como **usuarios de prueba** los Gmail que van a ingresar.
+3. *Credenciales → Crear credenciales → ID de cliente de OAuth*, tipo **Aplicación web**, con los orígenes de JavaScript autorizados `http://localhost:5173` y `http://localhost`.
+4. Copiar el **ID de cliente** en dos lugares:
+   1. Back-End: la variable `KUDOS_GOOGLE_CLIENT_ID` (punto 4.1 o 4.2).
+   2. Front-End: la constante `GOOGLE_CLIENT_ID`, en la primera línea de `js/login.js`.
+5. Permitir el dominio del correo. El parámetro `DOMINIO_CORREO_INSTITUCIONAL` acepta varios dominios separados por coma; en los datos de prueba ya viene `uco.edu.co,gmail.com`. En una base de datos creada antes:
+
+   ```sql
+   UPDATE kudos.parametro_sistema
+   SET valor = 'uco.edu.co,gmail.com'
+   WHERE clave = 'DOMINIO_CORREO_INSTITUCIONAL';
+   ```
+
+6. El correo de Google debe pertenecer a un usuario **registrado y activo**: Google solo comprueba quién es la persona, no crea cuentas. Para probar, se puede crear el usuario con el registro normal o con un `INSERT` en la tabla `usuario`.
 
 ---
 
@@ -277,6 +298,10 @@ El Front-End son archivos estáticos, así que se pueden publicar en cualquier s
 | `Port 8080 was already in use` | Otra instancia del Back-End sigue abierta | Detenerla en Eclipse (botón rojo) o cambiar `server.port` |
 | Después de reiniciar el Back-End todo responde 401 | Las sesiones se guardan en memoria | Cerrar sesión e iniciar de nuevo |
 | "Su cuenta aún no está activa" | Falta aprobar la solicitud o verificar el correo o el celular | Aprobar con el rol correspondiente y verificar con el código |
+| El botón de Google no aparece | Sin conexión a internet o el script de Google bloqueado | Revisar la conexión y la consola del navegador (F12) |
+| Google muestra "Error 400: origin_mismatch" | El origen del Front no está autorizado en el ID de cliente | Agregar `http://localhost:5173` y `http://localhost` en los orígenes autorizados |
+| "El inicio de sesión con Google no está configurado" | Falta la variable `KUDOS_GOOGLE_CLIENT_ID` en el Back-End | Agregarla (punto 4.1) y reiniciar el Back-End |
+| Con Google responde "No existe una cuenta registrada con el correo…" | El Gmail no pertenece a ningún usuario de Kudos | Registrar ese usuario o usar un correo registrado |
 | No llega el código de verificación | El envío es simulado | El código aparece en la consola del Back-End |
 | Un estudiante nuevo no aparece en Solicitudes | Lo aprueba el Coordinador del programa elegido, no el Administrador | Entrar con el coordinador de ese programa (Paula para Ing. de Sistemas) |
 | El navegador muestra una versión vieja de una página | Caché del navegador | Recargar con **Ctrl + F5** |

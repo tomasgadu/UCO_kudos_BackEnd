@@ -46,6 +46,7 @@ Los casos CU-001 a CU-015 vienen del enunciado. Los CU-016 a CU-025 se agregaron
 | CU-016 Registrarse | `POST /api/v1/usuarios` | `UsuarioNegocioImpl.registrarUsuario` |
 | CU-017 Verificar correo y celular | `POST /api/v1/usuarios/verificaciones` | `VerificacionContactoNegocioImpl.verificarCodigo` |
 | CU-018 Iniciar sesión | `POST /api/v1/sesiones` | `UsuarioNegocioImpl.iniciarSesion` |
+| CU-018 Iniciar sesión con Google | `POST /api/v1/sesiones/google` | `VerificadorTokenGoogle.obtenerCorreoVerificado`, `UsuarioNegocioImpl.iniciarSesionConGoogle` |
 | CU-019 Mi información | `GET` y `PUT /api/v1/usuarios/yo` | `UsuarioNegocioImpl.actualizarMiInformacion` |
 | CU-020 Decidir solicitud | `POST /api/v1/solicitudes/{id}/aprobar` y `/rechazar` | `SolicitudRegistroNegocioImpl` |
 | CU-021 Gestionar categorías | `POST`, `PUT`, `PATCH /api/v1/categorias` | `CategoriaNegocioImpl` |

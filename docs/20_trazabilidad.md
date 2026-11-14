@@ -126,6 +126,16 @@ Relaciona cada **requisito funcional** con sus **reglas de negocio**, **casos de
 
 ---
 
+## Funcionalidad adicional
+
+No es un RF del enunciado; se agregó por indicación del profesor.
+
+| Funcionalidad | CU | Clases | Componente | Pruebas | Evidencia | Estado |
+|---|---|---|---|---|---|---|
+| Iniciar sesión con Google | CU-018 | `VerificadorTokenGoogle`, `UsuarioNegocioImpl.iniciarSesionConGoogle`, `UtilTexto.correoPerteneceADominios` | `POST /sesiones/google` · `index.html` | `VerificadorTokenGoogleTest`, `UtilTextoTest` | Front #51, #52 | ✅ |
+
+---
+
 ## 20.7 Resumen
 
 | Estado | Cantidad | Requisitos |

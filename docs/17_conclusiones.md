@@ -2,10 +2,10 @@
 
 ## 17.1 Resultados
 
-1. Se construyó una plataforma **completamente funcional**: registro con aprobación y verificación, Kudos, conversaciones en árbol, calificaciones, reportes, vetos, notificaciones, auditoría y administración de la estructura.
+1. Se construyó una plataforma **completamente funcional**: registro con aprobación y verificación, inicio de sesión con correo y clave o con Google, Kudos, conversaciones en árbol, calificaciones, reportes, vetos, notificaciones, auditoría y administración de la estructura.
 2. El **Back-End** sigue una arquitectura en capas con dominio enriquecido, transacciones por caso de uso, eventos (Observer) y seguridad por permisos.
 3. El **Front-End** es sencillo y funcional: 11 páginas que consumen la API y muestran a cada rol solo lo que le corresponde.
-4. La calidad se verificó con **80 pruebas unitarias** (100 % exitosas), pruebas de integración con Bruno y **SonarQube** con el Quality Gate en *Passed*.
+4. La calidad se verificó con **85 pruebas unitarias** (100 % exitosas), pruebas de integración con Bruno y **SonarQube** con el Quality Gate en *Passed*.
 
 ## 17.2 Aprendizajes
 

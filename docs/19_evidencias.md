@@ -174,6 +174,8 @@ Además, la sección 19.11 muestra 4 **hallazgos** que aparecieron durante las p
 | 48 | Conversación | Árbol de réplicas, calificación, reportar (motivo obligatorio) |
 | 49 | Administración | Categorías con editar, activar y desactivar |
 | 50 | Auditoría | Registro de operaciones con usuario, acción y valores anterior y nuevo |
+| 51 | Botón de Google | El inicio de sesión ofrece correo y clave o Google |
+| 52 | Ingreso con Google | Un usuario registrado con Gmail entra con su cuenta de Google y ve su rol |
 
 ![Login](evidencias/pruebas/front_01_login.png)
 ![Inicio Administrador](evidencias/pruebas/front_02_inicio_administrador.png)
@@ -183,6 +185,8 @@ Además, la sección 19.11 muestra 4 **hallazgos** que aparecieron durante las p
 ![Conversación](evidencias/pruebas/front_06_conversacion.png)
 ![Administración](evidencias/pruebas/front_07_administracion.png)
 ![Auditoría](evidencias/pruebas/front_08_auditoria.png)
+![Botón de Google](evidencias/pruebas/front_09_boton_google.png)
+![Ingreso con Google](evidencias/pruebas/front_10_login_google.png)
 
 ## 19.11 Hallazgos durante las pruebas
 
