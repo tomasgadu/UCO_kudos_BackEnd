@@ -38,6 +38,7 @@ Toda la documentación está en [`docs/`](docs/):
 - [16. Pruebas](docs/16_pruebas.md)
 - [17. Conclusiones](docs/17_conclusiones.md)
 - [19. Evidencias de pruebas](docs/19_evidencias.md)
+- [20. Matriz de trazabilidad](docs/20_trazabilidad.md)
 - [Manual de puesta a punto](docs/18_manual_puesta_a_punto.md)
 
 ## Tecnologías

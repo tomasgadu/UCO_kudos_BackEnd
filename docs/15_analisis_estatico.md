@@ -81,6 +81,37 @@ Commit: `fix(calidad): Se corrigen los issues de SonarQube de nulos, índices y 
 
 ![Quality Gate después](evidencias/sonar_despues_quality_gate.png)
 
-## 15.6 Pendiente
+## 15.6 Análisis del Front-End
+
+El repositorio `UCO_kudos_FrontEnd` también se analizó con SonarQube Cloud (análisis automático, perfil *Sonar way* para JavaScript, CSS y HTML), porque el enunciado pide analizar **todos** los repositorios (RNF-025).
+
+### Antes
+
+El Quality Gate **falló** por *Reliability Rating* C, con 25 issues de severidad media.
+
+![Front antes](evidencias/sonar_front_antes_quality_gate.png)
+
+| Tipo | Cantidad | Problema | Corrección |
+|---|---|---|---|
+| Promesas sin manejar | 19 | Se llamaba a funciones `async` (por ejemplo `cargarMuro();`) sin `await`. Sonar no puede saber si se olvidó esperarlas. | Se marcan con `void` (`void cargarMuro();`): no se esperan a propósito porque cada función ya captura sus errores con `try/catch` y los muestra en pantalla. |
+| Campos sin etiqueta | 5 | Inputs de Administración y Auditoría con solo `placeholder`: un lector de pantalla no sabe qué campo es (accesibilidad WCAG 2 A). | Se agregó un `<label for="...">` a cada campo. |
+| Encabezado vacío | 1 | `<h2 id="saludo">` empezaba vacío hasta que el JavaScript lo llenaba. | Texto inicial "Bienvenido". |
+
+![Issues del Front](evidencias/sonar_front_antes_issues.png)
+
+Commit: `fix(calidad): Se corrigen los issues de SonarQube de promesas sin manejar y accesibilidad`.
+
+### Después
+
+| Métrica | Antes | Después |
+|---|---|---|
+| Quality Gate | ❌ Failed | ✅ **Passed** |
+| Issues | 25 | **0** |
+| Reliability Rating | C | A |
+| Duplicación | 0,0 % | 0,0 % |
+
+![Front después](evidencias/sonar_front_despues_quality_gate.png)
+
+## 15.7 Pendiente
 
 La **cobertura** aparece sin datos porque el análisis automático no ejecuta pruebas. Se configurará con JaCoCo cuando se agreguen las pruebas unitarias (sección [16. Pruebas](16_pruebas.md)).

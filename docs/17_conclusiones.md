@@ -20,6 +20,7 @@
 
 | Limitación | Impacto | Posible mejora |
 |---|---|---|
+| 19 requisitos sin endpoint propio (consultas de coordinaciones y vinculaciones, modificar facultad y programa, registrar Rector y Administrador, Kudos emitidos) | No se pueden usar desde la API, aunque el modelo y la base de datos los soportan | Exponerlos siguiendo el mismo patrón de capas (ver [20. Trazabilidad](20_trazabilidad.md)) |
 | Sesiones en memoria | Al reiniciar el Back hay que iniciar sesión de nuevo | Guardar las sesiones en la base de datos o usar JWT |
 | Envío de códigos simulado | El código de verificación aparece en el log y no llega por correo o SMS | Integrar un servicio de correo o SMS |
 | Suspender o desactivar cuentas | Los estados existen en el modelo, pero no tienen endpoint | Agregar la gestión de cuentas por la matriz de gestión |
