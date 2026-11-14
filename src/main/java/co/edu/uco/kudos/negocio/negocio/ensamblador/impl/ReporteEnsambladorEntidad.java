@@ -9,6 +9,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoReporte;
 import co.edu.uco.kudos.entidad.ReporteEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class ReporteEnsambladorEntidad implements EnsambladorEntidad<ReporteDominio, ReporteEntidad> {
 
@@ -28,10 +29,10 @@ public final class ReporteEnsambladorEntidad implements EnsambladorEntidad<Repor
 		destino.setId(dominioTmp.getId());
 		destino.setIdPublicacion(dominioTmp.getIdPublicacion());
 		destino.setReportante(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getReportante()));
-		destino.setMotivo(dominioTmp.getMotivo().name());
+		destino.setMotivo(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getMotivo()));
 		destino.setDescripcion(dominioTmp.getDescripcion());
 		destino.setFechaReporte(dominioTmp.getFechaReporte());
-		destino.setEstado(dominioTmp.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstado()));
 		destino.setRevisor(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getRevisor()));
 		destino.setFechaDecision(dominioTmp.getFechaDecision());
 		destino.setObservacionDecision(dominioTmp.getObservacionDecision());

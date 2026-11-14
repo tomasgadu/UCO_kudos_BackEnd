@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoSolicitud;
 import co.edu.uco.kudos.entidad.SolicitudRegistroEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class SolicitudRegistroEnsambladorEntidad implements EnsambladorEntidad<SolicitudRegistroDominio, SolicitudRegistroEntidad> {
 
@@ -29,7 +30,7 @@ public final class SolicitudRegistroEnsambladorEntidad implements EnsambladorEnt
 		destino.setRolSolicitado(RolEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getRolSolicitado()));
 		destino.setFacultad(FacultadEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getFacultad()));
 		destino.setProgramaAcademico(ProgramaAcademicoEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getProgramaAcademico()));
-		destino.setEstado(dominioTmp.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstado()));
 		destino.setFechaSolicitud(dominioTmp.getFechaSolicitud());
 		destino.setAprobador(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getAprobador()));
 		destino.setFechaDecision(dominioTmp.getFechaDecision());

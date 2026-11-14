@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.TipoNotificacion;
 import co.edu.uco.kudos.entidad.NotificacionEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class NotificacionEnsambladorEntidad implements EnsambladorEntidad<NotificacionDominio, NotificacionEntidad> {
 
@@ -26,7 +27,7 @@ public final class NotificacionEnsambladorEntidad implements EnsambladorEntidad<
 		var destino = new NotificacionEntidad();
 		destino.setId(dominioTmp.getId());
 		destino.setDestinatario(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getDestinatario()));
-		destino.setTipo(dominioTmp.getTipo().name());
+		destino.setTipo(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getTipo()));
 		destino.setMensaje(dominioTmp.getMensaje());
 		destino.setFechaCreacion(dominioTmp.getFechaCreacion());
 		destino.setLeida(dominioTmp.isLeida());

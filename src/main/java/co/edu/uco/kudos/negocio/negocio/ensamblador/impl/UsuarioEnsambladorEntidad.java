@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoCuenta;
 import co.edu.uco.kudos.entidad.UsuarioEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class UsuarioEnsambladorEntidad implements EnsambladorEntidad<UsuarioDominio, UsuarioEntidad> {
 
@@ -32,7 +33,7 @@ public final class UsuarioEnsambladorEntidad implements EnsambladorEntidad<Usuar
 		destino.setClave(dominioTmp.getClave());
 		destino.setCorreoVerificado(dominioTmp.isCorreoVerificado());
 		destino.setCelularVerificado(dominioTmp.isCelularVerificado());
-		destino.setEstadoCuenta(dominioTmp.getEstadoCuenta().name());
+		destino.setEstadoCuenta(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstadoCuenta()));
 		destino.setRol(RolEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getRol()));
 		destino.setFechaRegistro(dominioTmp.getFechaRegistro());
 		return destino;

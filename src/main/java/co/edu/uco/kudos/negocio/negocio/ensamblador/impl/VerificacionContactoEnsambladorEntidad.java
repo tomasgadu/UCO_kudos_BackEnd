@@ -9,6 +9,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoVerificacion;
 import co.edu.uco.kudos.entidad.VerificacionContactoEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class VerificacionContactoEnsambladorEntidad implements EnsambladorEntidad<VerificacionContactoDominio, VerificacionContactoEntidad> {
 
@@ -27,13 +28,13 @@ public final class VerificacionContactoEnsambladorEntidad implements Ensamblador
 		var destino = new VerificacionContactoEntidad();
 		destino.setId(dominioTmp.getId());
 		destino.setUsuario(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(dominioTmp.getUsuario()));
-		destino.setTipo(dominioTmp.getTipo().name());
+		destino.setTipo(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getTipo()));
 		destino.setValorVerificado(dominioTmp.getValorVerificado());
 		destino.setCodigo(dominioTmp.getCodigo());
 		destino.setFechaEnvio(dominioTmp.getFechaEnvio());
 		destino.setFechaExpiracion(dominioTmp.getFechaExpiracion());
 		destino.setFechaVerificacion(dominioTmp.getFechaVerificacion());
-		destino.setEstado(dominioTmp.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstado()));
 		return destino;
 	}
 

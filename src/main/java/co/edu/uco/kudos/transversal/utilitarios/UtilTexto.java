@@ -4,6 +4,7 @@ public final class UtilTexto {
 
 	private static UtilTexto instancia;
 	public static final String VACIO = "";
+	public static final String VALOR_NO_DEFINIDO = "NO_DEFINIDO";
 	public static final String SOLO_LETRAS_ESPACIOS = "^[a-zA-Z ñÑáÁéÉíÍóÓúÚüÜ]*$";
 	public static final String LETRAS_DIGITOS = "^[a-zA-Z0-9]*$";
 	public static final String SOLO_DIGITOS = "^[0-9]*$";
@@ -59,6 +60,13 @@ public final class UtilTexto {
 			resultado.append(palabra.substring(0, 1).toUpperCase()).append(palabra.substring(1));
 		}
 		return resultado.toString();
+	}
+
+	public String textoDeEnum(Enum<?> valor) {
+		if (UtilObjeto.esNulo(valor) || VALOR_NO_DEFINIDO.equals(valor.name())) {
+			return VACIO;
+		}
+		return valor.name();
 	}
 
 	public String limpiarParaRegistro(String valor) {

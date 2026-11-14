@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoPublicacion;
 import co.edu.uco.kudos.entidad.KudoEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class KudoEnsambladorEntidad implements EnsambladorEntidad<KudoDominio, KudoEntidad> {
 
@@ -28,7 +29,7 @@ public final class KudoEnsambladorEntidad implements EnsambladorEntidad<KudoDomi
 		destino.setAutor(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(origen.getAutor()));
 		destino.setContenido(origen.getContenido());
 		destino.setFechaCreacion(origen.getFechaCreacion());
-		destino.setEstado(origen.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(origen.getEstado()));
 		destino.setDestinatario(UsuarioEnsambladorEntidad.getInstancia().convertirAEntidad(origen.getDestinatario()));
 		destino.setCategoria(CategoriaEnsambladorEntidad.getInstancia().convertirAEntidad(origen.getCategoria()));
 		return destino;

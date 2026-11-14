@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoRegistro;
 import co.edu.uco.kudos.entidad.FacultadEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class FacultadEnsambladorEntidad implements EnsambladorEntidad<FacultadDominio, FacultadEntidad> {
 
@@ -26,7 +27,7 @@ public final class FacultadEnsambladorEntidad implements EnsambladorEntidad<Facu
 		var destino = new FacultadEntidad();
 		destino.setId(dominioTmp.getId());
 		destino.setNombre(dominioTmp.getNombre());
-		destino.setEstado(dominioTmp.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstado()));
 		destino.setFechaCreacion(dominioTmp.getFechaCreacion());
 		return destino;
 	}

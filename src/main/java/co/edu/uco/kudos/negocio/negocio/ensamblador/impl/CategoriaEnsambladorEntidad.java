@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.EstadoRegistro;
 import co.edu.uco.kudos.entidad.CategoriaEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class CategoriaEnsambladorEntidad implements EnsambladorEntidad<CategoriaDominio, CategoriaEntidad> {
 
@@ -27,7 +28,7 @@ public final class CategoriaEnsambladorEntidad implements EnsambladorEntidad<Cat
 		destino.setId(dominioTmp.getId());
 		destino.setNombre(dominioTmp.getNombre());
 		destino.setDescripcion(dominioTmp.getDescripcion());
-		destino.setEstado(dominioTmp.getEstado().name());
+		destino.setEstado(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getEstado()));
 		destino.setFechaCreacion(dominioTmp.getFechaCreacion());
 		return destino;
 	}

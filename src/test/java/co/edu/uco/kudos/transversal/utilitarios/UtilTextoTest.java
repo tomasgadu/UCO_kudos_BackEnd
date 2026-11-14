@@ -10,6 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import co.edu.uco.kudos.dominio.enums.EstadoRegistro;
+
 class UtilTextoTest {
 
 	private final UtilTexto texto = UtilTexto.getUtilTexto();
@@ -34,6 +36,14 @@ class UtilTextoTest {
 		assertEquals("correo_LINEA FALSA", texto.limpiarParaRegistro("correo\nLINEA FALSA"));
 		assertEquals("a_b", texto.limpiarParaRegistro("a\rb"));
 		assertEquals(UtilTexto.VACIO, texto.limpiarParaRegistro(null));
+	}
+
+	@Test
+	@DisplayName("Un enum NO_DEFINIDO se convierte en texto vacío para no filtrar por él")
+	void textoDeEnum() {
+		assertEquals("ACTIVA", texto.textoDeEnum(EstadoRegistro.ACTIVA));
+		assertEquals(UtilTexto.VACIO, texto.textoDeEnum(EstadoRegistro.NO_DEFINIDO));
+		assertEquals(UtilTexto.VACIO, texto.textoDeEnum(null));
 	}
 
 	@Test

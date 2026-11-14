@@ -8,6 +8,7 @@ import co.edu.uco.kudos.dominio.enums.CodigoRol;
 import co.edu.uco.kudos.entidad.RolEntidad;
 import co.edu.uco.kudos.negocio.negocio.ensamblador.EnsambladorEntidad;
 import co.edu.uco.kudos.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.kudos.transversal.utilitarios.UtilTexto;
 
 public final class RolEnsambladorEntidad implements EnsambladorEntidad<RolDominio, RolEntidad> {
 
@@ -25,7 +26,7 @@ public final class RolEnsambladorEntidad implements EnsambladorEntidad<RolDomini
 		var dominioTmp = UtilObjeto.obtenerValorDefectoSiValorOriginalEsNulo(dominio, new RolDominio.Builder().build());
 		var destino = new RolEntidad();
 		destino.setId(dominioTmp.getId());
-		destino.setCodigo(dominioTmp.getCodigo().name());
+		destino.setCodigo(UtilTexto.getUtilTexto().textoDeEnum(dominioTmp.getCodigo()));
 		destino.setNombre(dominioTmp.getNombre());
 		destino.setDescripcion(dominioTmp.getDescripcion());
 		destino.setIdRolAprobador(dominioTmp.getIdRolAprobador());
