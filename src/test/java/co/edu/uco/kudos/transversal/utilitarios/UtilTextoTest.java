@@ -47,6 +47,15 @@ class UtilTextoTest {
 	}
 
 	@Test
+	@DisplayName("El correo debe pertenecer a alguno de los dominios permitidos")
+	void correoEnDominiosPermitidos() {
+		assertTrue(texto.correoPerteneceADominios("tomas.gallo@uco.edu.co", "uco.edu.co,gmail.com"));
+		assertTrue(texto.correoPerteneceADominios("Tomas.Gallo@Gmail.com", "uco.edu.co, gmail.com"));
+		assertFalse(texto.correoPerteneceADominios("tomas@hotmail.com", "uco.edu.co,gmail.com"));
+		assertFalse(texto.correoPerteneceADominios(null, "uco.edu.co"));
+	}
+
+	@Test
 	@DisplayName("Valida el formato del correo")
 	void formatoCorreo() {
 		assertTrue(texto.formatoEsValido("laura.gomez@uco.edu.co", UtilTexto.CORREO));

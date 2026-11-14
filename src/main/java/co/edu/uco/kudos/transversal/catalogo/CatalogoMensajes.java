@@ -154,6 +154,10 @@ public final class CatalogoMensajes {
 		public static final String USUARIO_ERROR_CUENTA_NO_ACTIVA = "Su cuenta no está activa.";
 		public static final String SESION_INICIADA = "Bienvenido(a) a UCO Kudos.";
 		public static final String SESION_CERRADA = "La sesión se cerró correctamente.";
+		public static final String USUARIO_ERROR_GOOGLE_NO_CONFIGURADO = "El inicio de sesión con Google no está configurado en el servidor.";
+		public static final String USUARIO_ERROR_GOOGLE_TOKEN_INVALIDO = "No fue posible validar su cuenta de Google. Intente de nuevo.";
+		public static final String USUARIO_ERROR_GOOGLE_NO_REGISTRADO = "No existe una cuenta registrada con el correo %s. Regístrese primero.";
+		public static final String TECNICO_ERROR_GOOGLE = "Validación del token de Google fallida: %s";
 	}
 
 	public static final class Usuario {

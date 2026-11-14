@@ -30,7 +30,7 @@ public final class AsegurarCorreoInstitucionalRegla implements Regla<Object> {
 		var parametros = daoFactory.obtenerParametroSistemaDAO().consultarPorFiltro(filtro);
 		var dominio = parametros.isEmpty() ? DOMINIO_DEFECTO : parametros.get(0).getValor().toLowerCase();
 
-		if (UtilTexto.getUtilTexto().esVacia(correo) || !correo.endsWith("@" + dominio)) {
+		if (!UtilTexto.getUtilTexto().correoPerteneceADominios(correo, dominio)) {
 			throw KudosNegocioExcepcion
 					.crear(CatalogoMensajes.Usuario.USUARIO_ERROR_CORREO_NO_INSTITUCIONAL.formatted(dominio));
 		}

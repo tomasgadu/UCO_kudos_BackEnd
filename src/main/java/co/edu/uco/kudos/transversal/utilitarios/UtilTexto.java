@@ -69,6 +69,19 @@ public final class UtilTexto {
 		return valor.name();
 	}
 
+	public boolean correoPerteneceADominios(String correo, String dominios) {
+		var correoNormalizado = quitarEspacioEnBlanco(correo).toLowerCase();
+		if (esVacia(correoNormalizado)) {
+			return false;
+		}
+		for (var dominio : quitarEspacioEnBlanco(dominios).toLowerCase().split(",")) {
+			if (!esVacia(dominio) && correoNormalizado.endsWith("@" + dominio.trim())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String limpiarParaRegistro(String valor) {
 		return obtenerValorDefecto(valor).replaceAll("[\\r\\n]", "_");
 	}

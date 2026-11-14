@@ -101,8 +101,24 @@ public final class UsuarioNegocioImpl implements UsuarioNegocio {
 		if (encontrados.isEmpty() || !UtilClave.coincide(clave, encontrados.get(0).getClave())) {
 			throw KudosNegocioExcepcion.crear(CatalogoMensajes.Usuario.USUARIO_ERROR_CREDENCIALES);
 		}
-		var usuario = UsuarioEnsambladorEntidad.getInstancia().convertirADominio(encontrados.get(0));
+		return abrirSesion(UsuarioEnsambladorEntidad.getInstancia().convertirADominio(encontrados.get(0)));
+	}
 
+	@Override
+	public UsuarioDominio iniciarSesionConGoogle(String correoVerificado) {
+		var correo = UtilTexto.getUtilTexto().quitarEspacioEnBlanco(correoVerificado).toLowerCase();
+		var filtro = new UsuarioEntidad();
+		filtro.setCorreoInstitucional(correo);
+		var encontrados = daoFactory.obtenerUsuarioDAO().consultarPorFiltro(filtro);
+
+		if (UtilTexto.getUtilTexto().esVacia(correo) || encontrados.isEmpty()) {
+			throw KudosNegocioExcepcion
+					.crear(CatalogoMensajes.Seguridad.USUARIO_ERROR_GOOGLE_NO_REGISTRADO.formatted(correo));
+		}
+		return abrirSesion(UsuarioEnsambladorEntidad.getInstancia().convertirADominio(encontrados.get(0)));
+	}
+
+	private UsuarioDominio abrirSesion(UsuarioDominio usuario) {
 		if (!usuario.estaActivo()) {
 			if (usuario.getEstadoCuenta() != EstadoCuenta.REGISTRADA) {
 				throw KudosNegocioExcepcion.crear(CatalogoMensajes.Seguridad.USUARIO_ERROR_CUENTA_NO_ACTIVA);

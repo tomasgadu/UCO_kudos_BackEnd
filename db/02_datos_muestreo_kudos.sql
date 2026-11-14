@@ -36,7 +36,7 @@ INSERT INTO CATEGORIA (ID_CATEGORIA, NOMBRE, DESCRIPCION, ESTADO, FECHA_CREACION
     ('00000000-0000-0000-0003-000000000005', 'Innovación', 'Reconoce ideas y proyectos innovadores.', 'INACTIVA', '2026-01-12 09:04:00');
 
 INSERT INTO PARAMETRO_SISTEMA (ID_PARAMETRO_SISTEMA, CLAVE, VALOR, DESCRIPCION) VALUES
-    ('00000000-0000-0000-0004-000000000001', 'DOMINIO_CORREO_INSTITUCIONAL', 'uco.edu.co', 'Dominio permitido para los correos institucionales.'),
+    ('00000000-0000-0000-0004-000000000001', 'DOMINIO_CORREO_INSTITUCIONAL', 'uco.edu.co,gmail.com', 'Dominios permitidos para los correos, separados por coma.'),
     ('00000000-0000-0000-0004-000000000002', 'MINUTOS_EXPIRACION_CODIGO', '15', 'Minutos de vigencia de un código de verificación.'),
     ('00000000-0000-0000-0004-000000000003', 'INDICATIVO_CELULAR', '+57', 'Indicativo fijo de los números celulares.');
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.kudos.controlador.AbstractRestController;
 import co.edu.uco.kudos.controlador.respuesta.RespuestaOk;
 import co.edu.uco.kudos.controlador.seguridad.GestorSesiones;
+import co.edu.uco.kudos.dto.CredencialGoogleDTO;
 import co.edu.uco.kudos.dto.CredencialesDTO;
 import co.edu.uco.kudos.dto.SesionDTO;
 import co.edu.uco.kudos.negocio.fachada.UsuarioFachada;
@@ -26,6 +27,13 @@ public class SesionControlador extends AbstractRestController {
 	@PostMapping
 	public ResponseEntity<RespuestaOk<SesionDTO>> iniciarSesion(@RequestBody CredencialesDTO credenciales) {
 		var usuario = fachada.iniciarSesion(credenciales);
+		var token = GestorSesiones.obtenerInstancia().crearSesion(usuario.getId());
+		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Seguridad.SESION_INICIADA, new SesionDTO(token, usuario)));
+	}
+
+	@PostMapping("/google")
+	public ResponseEntity<RespuestaOk<SesionDTO>> iniciarSesionConGoogle(@RequestBody CredencialGoogleDTO credencial) {
+		var usuario = fachada.iniciarSesionConGoogle(credencial);
 		var token = GestorSesiones.obtenerInstancia().crearSesion(usuario.getId());
 		return ResponseEntity.ok(RespuestaOk.crear(CatalogoMensajes.Seguridad.SESION_INICIADA, new SesionDTO(token, usuario)));
 	}

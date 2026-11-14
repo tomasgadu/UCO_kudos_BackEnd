@@ -6,6 +6,7 @@ import java.util.UUID;
 import co.edu.uco.kudos.dominio.RolDominio;
 import co.edu.uco.kudos.dominio.UsuarioDominio;
 import co.edu.uco.kudos.dominio.enums.TipoVerificacion;
+import co.edu.uco.kudos.dto.CredencialGoogleDTO;
 import co.edu.uco.kudos.dto.CredencialesDTO;
 import co.edu.uco.kudos.dto.RegistroUsuarioDTO;
 import co.edu.uco.kudos.dto.UsuarioDTO;
@@ -16,6 +17,7 @@ import co.edu.uco.kudos.negocio.fachada.ensamblador.impl.UsuarioEnsambladorDTO;
 import co.edu.uco.kudos.negocio.negocio.impl.UsuarioNegocioImpl;
 import co.edu.uco.kudos.negocio.negocio.impl.VerificacionContactoNegocioImpl;
 import co.edu.uco.kudos.negocio.negocio.reglas.impl.usuario.ObtenerUsuarioActivoRegla;
+import co.edu.uco.kudos.negocio.negocio.servicios.VerificadorTokenGoogle;
 
 public final class UsuarioFachadaImpl extends FachadaBase implements UsuarioFachada {
 
@@ -55,6 +57,13 @@ public final class UsuarioFachadaImpl extends FachadaBase implements UsuarioFach
 		return ejecutarEnTransaccion("iniciar sesión", daoFactory -> UsuarioEnsambladorDTO.getInstancia().convertirADTO(
 				new UsuarioNegocioImpl(daoFactory).iniciarSesion(credenciales.getCorreoInstitucional(),
 						credenciales.getClave())));
+	}
+
+	@Override
+	public UsuarioDTO iniciarSesionConGoogle(CredencialGoogleDTO credencial) {
+		var correo = VerificadorTokenGoogle.obtenerCorreoVerificado(credencial.getCredencial());
+		return ejecutarEnTransaccion("iniciar sesión con Google", daoFactory -> UsuarioEnsambladorDTO.getInstancia()
+				.convertirADTO(new UsuarioNegocioImpl(daoFactory).iniciarSesionConGoogle(correo)));
 	}
 
 	@Override

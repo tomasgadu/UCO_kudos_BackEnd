@@ -11,6 +11,8 @@ public interface UsuarioNegocio {
 
 	UsuarioDominio iniciarSesion(String correoInstitucional, String clave);
 
+	UsuarioDominio iniciarSesionConGoogle(String correoVerificado);
+
 	UsuarioDominio consultarUsuario(UUID id);
 
 	UsuarioDominio actualizarMiInformacion(UUID idUsuario, UsuarioDominio datos);
