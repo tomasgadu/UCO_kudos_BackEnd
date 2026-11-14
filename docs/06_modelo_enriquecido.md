@@ -421,7 +421,7 @@ Objeto de dominio que representa a una persona de la comunidad universitaria reg
 
 | id | nombres | apellidos | correoInstitucional | numeroCelular | claveHash | correoVerificado | celularVerificado | estadoCuenta | rol | fechaRegistro | Combinación única 1 | Combinación única 2 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Laura | Gómez | laura.gomez@uco.edu.co | 3001112233 | ******** | Sí | Sí | ACTIVA | ADMINISTRADOR | 2026-01-05 08:00:00 | laura.gomez@uco.edu.co | 3001112233 |
+| 1 | Tomás | Gallo | tomas.gallo@uco.edu.co | 3194769047 | ******** | Sí | Sí | ACTIVA | ADMINISTRADOR | 2026-01-05 08:00:00 | tomas.gallo@uco.edu.co | 3194769047 |
 | 2 | Carlos | Restrepo | carlos.restrepo@uco.edu.co | 3002223344 | ******** | Sí | Sí | ACTIVA | RECTOR | 2026-01-06 09:00:00 | carlos.restrepo@uco.edu.co | 3002223344 |
 | 3 | Ana | Martínez | ana.martinez@uco.edu.co | 3003334455 | ******** | Sí | Sí | ACTIVA | COORDINADOR_ACADEMICO | 2026-01-07 10:00:00 | ana.martinez@uco.edu.co | 3003334455 |
 | 4 | Jorge | Ramírez | jorge.ramirez@uco.edu.co | 3004445566 | ******** | Sí | Sí | ACTIVA | COORDINADOR_FACULTAD | 2026-01-08 10:00:00 | jorge.ramirez@uco.edu.co | 3004445566 |
@@ -729,7 +729,7 @@ Objeto de dominio que representa la petición de una persona para ejercer un rol
 
 | id | solicitante | rolSolicitado | facultad | programaAcademico | estado | fechaSolicitud | aprobador | fechaDecision | observacion |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | Carlos Restrepo | RECTOR |  |  | APROBADA | 2026-01-06 09:00:00 | Laura Gómez | 2026-01-06 09:30:00 | Registrado por el Administrador. |
+| 1 | Carlos Restrepo | RECTOR |  |  | APROBADA | 2026-01-06 09:00:00 | Tomás Gallo | 2026-01-06 09:30:00 | Registrado por el Administrador. |
 | 2 | Ana Martínez | COORDINADOR_ACADEMICO |  |  | APROBADA | 2026-01-07 10:00:00 | Carlos Restrepo | 2026-01-07 11:00:00 |  |
 | 3 | Jorge Ramírez | COORDINADOR_FACULTAD | Ingeniería |  | APROBADA | 2026-01-08 10:00:00 | Ana Martínez | 2026-01-08 12:00:00 |  |
 | 4 | Paula Ospina | COORDINADOR_PROGRAMA |  | Ingeniería de Sistemas | APROBADA | 2026-01-09 11:00:00 | Jorge Ramírez | 2026-01-09 15:00:00 |  |

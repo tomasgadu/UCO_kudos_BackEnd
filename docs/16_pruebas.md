@@ -70,7 +70,7 @@ La cobertura total es baja a propósito: las pruebas unitarias se concentraron e
 
 ## 16.4 Pruebas de integración con Bruno
 
-Colección organizada por flujo. El token de sesión se guarda en una variable (`{{tokenLaura}}`, `{{tokenCarlos}}`) con un script posterior al login, y las demás peticiones lo heredan.
+Colección organizada por flujo. El token de sesión se guarda en una variable (`{{tokenTomas}}`, `{{tokenCarlos}}`) con un script posterior al login, y las demás peticiones lo heredan.
 
 | Flujo | Casos probados | Resultado esperado |
 |---|---|---|
